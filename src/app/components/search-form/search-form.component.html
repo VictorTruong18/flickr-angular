@@ -1,0 +1,38 @@
+<div class="content" role="main">
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="" appearance="fill">
+        <mat-label>Your Search</mat-label>
+        <input
+          matInput
+          formControlName="keyword"
+          placeholder="Your search"
+          value=""
+        />
+      </mat-form-field>
+      
+      <!--Min and Max Upload Date Filter -->
+    <mat-form-field appearance="fill">
+      <mat-label>Minimum Upload Date</mat-label>
+      <input matInput [matDatepicker]="minDate" formControlName="min_upload_date">
+      <mat-datepicker-toggle matSuffix [for]="minDate"></mat-datepicker-toggle>
+      <mat-datepicker #minDate></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Maximum Upload Date</mat-label>
+      <input matInput [matDatepicker]="maxDate" formControlName="max_upload_date">
+      <mat-datepicker-toggle matSuffix [for]="maxDate"></mat-datepicker-toggle>
+      <mat-datepicker #maxDate></mat-datepicker>
+    </mat-form-field>
+
+      
+      <button mat-button color="primary">Search</button>
+     </form>
+     <mat-slider *ngIf="arr.length > 0" class="centered" step="2" min="1" max="40" value="16" (input)="onInputChange($event)"></mat-slider>
+</div>
+
+
+  
+<div class="container">
+  <app-images-list [images]="arr"></app-images-list>
+  </div>
