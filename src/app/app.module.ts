@@ -14,14 +14,16 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ImageInfosComponent } from './pages/image-infos/image-infos.component'
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SearchFormComponent,
     ImagesListComponent,
-    ImageComponent
+    ImageComponent,
+    ImageInfosComponent
   ],
   imports: [
     BrowserModule,

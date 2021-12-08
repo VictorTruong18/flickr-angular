@@ -1,5 +1,5 @@
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
@@ -17,7 +17,7 @@ export class FlickrSearchService {
 
   //Appel de l'API Flickr pour une recherche globale
   //Les images sont au format JSON
-  getImagesFlickr(form: FormGroup) : Observable<imageInterface>{
+  getImagesFlickr(form: FormGroup) : Observable<photosInterface>{
     
     const keyword = form.value.keyword;
     if (this.prevKeyword === keyword) {
@@ -26,15 +26,26 @@ export class FlickrSearchService {
       this.currPage = 1;
     }
     this.prevKeyword = keyword;
-    const url ='https://www.flickr.com/services/rest/?method=flickr.photos.search&'
-    let params = `api_key=${environment.flickr.key}&text=${keyword}&format=json&nojsoncallback=1&per_page=50&page=${this.currPage}`
+    const url ='https://www.flickr.com/services/rest/?method=flickr.photos.search&';
+    let params = `api_key=${environment.flickr.key}&text=${keyword}&format=json&nojsoncallback=1&per_page=100&page=${this.currPage}`;
 
     params = this.getFilters(params,form);
 
-    console.log(url +params);
-    return this.http.get<imageInterface>(url+params);
+    
+
+    return this.http.get<photosInterface>(url+params);
 
   }
+
+  getImageInfo(id: string): Observable<imageInterface>{
+    const url ='https://www.flickr.com/services/rest/?method=flickr.photos.getInfo&';
+    let params = `&api_key=${environment.flickr.key}&photo_id=${id}&format=json&nojsoncallback=1`;
+    console.log(url+params);
+    return this.http.get<imageInterface>(url+params);
+  }
+
+  //Appel de l'API Flickr pour rechercher les informations 
+  //Les images sont au format JSON
 
   getFilters(params:string, form:FormGroup){
     let minUpload = form.value.min_upload_date
@@ -61,10 +72,76 @@ export interface FlickrPhoto {
   title: string;
 }
 
-export interface imageInterface {
+
+export interface photosInterface {
   photos: {
     photo: FlickrPhoto[];
   };
 }
+
+export interface imageInterface {
+  photo: {
+    farm: string;
+    id: string;
+    secret: string;
+    server: string;
+    originalformat: string;
+    isfavorite: string;
+    dateuploaded: string;
+    owner: Owner;
+    title: Title;
+    description: Description;
+    visibility: Visibility;
+    dates: Dates;
+    views: string;
+    comments: Comments;
+    tags: Tags;
+  };
+}
+
+interface Owner {
+  nsid: string;
+  username: string;
+  realname: string;
+  location: string;
+}
+
+interface Title {
+  _content: string;
+}
+
+interface Description {
+  _content: string;
+}
+
+interface Visibility {
+  ispublic: string;
+  isfriend: string;
+  isfamily: string;
+}
+
+interface Dates {
+  posted: string;
+  taken: string;
+  takengranularity: string;
+  takenunknown: string;
+  lastupdate: string;
+}
+
+interface Comments {
+  _content: string;
+}
+interface Tags {
+  tag: Tag[];
+}
+
+interface Tag {
+  id: string;
+  author: string;
+  authorname: string;
+  raw: string;
+  _content: string;
+}
+
 
 
