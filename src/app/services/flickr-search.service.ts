@@ -31,7 +31,7 @@ export class FlickrSearchService {
 
     params = this.getFilters(params,form);
 
-    
+    console.log(url + params);
 
     return this.http.get<photosInterface>(url+params);
 
@@ -77,6 +77,7 @@ export interface photosInterface {
   photos: {
     photo: FlickrPhoto[];
   };
+  stat: string;
 }
 
 export interface imageInterface {

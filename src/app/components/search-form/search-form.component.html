@@ -42,12 +42,16 @@
 
  
      
-     <mat-button-toggle-group  *ngIf="arr.length > 0" name="fontStyle" aria-label="Font Style">
+     <mat-button-toggle-group  *ngIf="arr.length > 0 || (currentPage > 1 && arr.length == 0)" name="fontStyle" aria-label="Font Style">
       <mat-button-toggle value="bold" (click)="this.pagePrescedente()">Page Prescedente</mat-button-toggle>
       <mat-button-toggle value="bold" (click)="this.pageSuivante()">Page Suivante</mat-button-toggle>
     </mat-button-toggle-group>
 
-     <h1  *ngIf="arr.length > 0">Numero de Page : {{ currentPage }}</h1>
+    <h1  *ngIf="( currentPage > 1 && arr.length == 0)">Aucune Photo sur cette page ! Revenir en arriere ? </h1>
+
+     <h1  *ngIf="arr.length > 0 ">Numero de Page : {{ currentPage }}</h1>
+     <mat-progress-bar   *ngIf="this.showProgressBar" mode="indeterminate"></mat-progress-bar>
+     
 </div>
 
 
@@ -58,4 +62,5 @@
   <app-images-list [images]="arr"></app-images-list>
   </div>
 
-  <mat-progress-bar mode="determinate" value="0"></mat-progress-bar>
+ 
+

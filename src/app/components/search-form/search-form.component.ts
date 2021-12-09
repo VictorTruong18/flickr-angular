@@ -44,6 +44,7 @@ export class SearchFormComponent implements OnInit {
 
   currentPage : any = 1;
   previousKeyword : any = null; 
+  showProgressBar : boolean = false;
   constructor(private formBuilder: FormBuilder,private flickrService: FlickrSearchService) { }
 
   ngOnInit(): void {
@@ -54,22 +55,32 @@ export class SearchFormComponent implements OnInit {
    onSubmit(){
      if(this.searchForm.value.keyword == this.previousKeyword){
       this.previousKeyword = this.searchForm.value.keyword;
+      this.showProgressBar = true;
       this.flickrService.getImagesFlickr(this.searchForm, this.currentPage).subscribe(
+        
       (data) => {
-        this.arr = (data.photos.photo);
-        shuffle(this.arr);
-        console.log("Toutes les images " + this.arr);
+        
+        if(data.stat == "ok"){
+          this.showProgressBar = false;
+          this.arr = (data.photos.photo);
+          shuffle(this.arr);
+          console.log("Toutes les images " + this.arr);
+        } 
       }
     );
   
     } else {
       this.previousKeyword = this.searchForm.value.keyword;
       this.currentPage = 1;
+      this.showProgressBar = true;
       this.flickrService.getImagesFlickr(this.searchForm, this.currentPage).subscribe(
       (data) => {
-        this.arr = (data.photos.photo);
-        shuffle(this.arr);
-        console.log("Toutes les images " + this.arr);
+        
+        if(data.stat == "ok"){
+          this.showProgressBar = false;
+          this.arr = (data.photos.photo);
+          shuffle(this.arr);
+        } 
       }
       );
     }
