@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatProgressBar } from '@angular/material/progress-bar';
 import { ActivatedRoute } from "@angular/router";
 import { FlickrSearchService } from '../../services/flickr-search.service';
 @Component({

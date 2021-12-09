@@ -9,6 +9,7 @@
           value=""
         />
       </mat-form-field>
+    
       
       <!--Min and Max Upload Date Filter -->
     <mat-form-field appearance="fill">
@@ -24,11 +25,22 @@
       <mat-datepicker-toggle matSuffix [for]="maxDate"></mat-datepicker-toggle>
       <mat-datepicker #maxDate></mat-datepicker>
     </mat-form-field>
+    
+    <mat-form-field class="" appearance="fill">
+      <input matInput formControlName="nbPhotos" 
+      placeholder="Number of photos per page (default : 50) " />
+      
+    </mat-form-field>
 
       
       <button mat-button color="primary">Search</button>
      </form>
+
+     <div *ngIf="arr.length == 0; else other_content">Faites Une Recherche et Pleins de belles Photos Apparaitront</div>
+      <ng-template #other_content>Voila {{arr.length}} belles photos !</ng-template>
      <mat-slider *ngIf="arr.length > 0" class="centered" step="2" min="1" max="40" value="16" (input)="onInputChange($event)"></mat-slider>
+
+     
 </div>
 
 
@@ -36,3 +48,5 @@
 <div class="container">
   <app-images-list [images]="arr"></app-images-list>
   </div>
+
+  <mat-progress-bar mode="determinate" value="0"></mat-progress-bar>

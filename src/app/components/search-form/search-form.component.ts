@@ -34,7 +34,7 @@ export class SearchFormComponent implements OnInit {
     max_upload_date: '',
     nsfw: false,
     tags: [],
-    galery: '',
+    nbPhotos: 50,
   })
 
   
@@ -47,9 +47,11 @@ export class SearchFormComponent implements OnInit {
 
   //Fonction qui est triggered des que l'utilisateur appuie sur Submit
    onSubmit(){
-     this.flickrService.getImagesFlickr(this.searchForm).subscribe(
+      
+      this.flickrService.getImagesFlickr(this.searchForm).subscribe(
       (data) => {
         this.arr = (data.photos.photo);
+        shuffle(this.arr);
         console.log("Toutes les images " + this.arr);
       }
     );
@@ -61,4 +63,6 @@ export class SearchFormComponent implements OnInit {
 
 
 
-
+function shuffle(array : any) {
+  array.sort(() => Math.random() - 0.5);
+}

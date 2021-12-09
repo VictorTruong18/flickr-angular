@@ -15,7 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ImageInfosComponent } from './pages/image-infos/image-infos.component'
+import { ImageInfosComponent } from './pages/image-infos/image-infos.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { ImageInfosComponent } from './pages/image-infos/image-infos.component'
     HttpClientModule,
     MatNativeDateModule,
     MatSliderModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

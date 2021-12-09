@@ -20,14 +20,14 @@ export class FlickrSearchService {
   getImagesFlickr(form: FormGroup) : Observable<photosInterface>{
     
     const keyword = form.value.keyword;
-    if (this.prevKeyword === keyword) {
-      this.currPage++;
-    } else {
-      this.currPage = 1;
-    }
+    // if (this.prevKeyword === keyword) {
+    //   this.currPage++;
+    // } else {
+    //   this.currPage = 1;
+    // }
     this.prevKeyword = keyword;
     const url ='https://www.flickr.com/services/rest/?method=flickr.photos.search&';
-    let params = `api_key=${environment.flickr.key}&text=${keyword}&format=json&nojsoncallback=1&per_page=100&page=${this.currPage}`;
+    let params = `api_key=${environment.flickr.key}&text=${keyword}&format=json&nojsoncallback=1&per_page=${form.value.nbPhotos}&page=${this.currPage}`;
 
     params = this.getFilters(params,form);
 
