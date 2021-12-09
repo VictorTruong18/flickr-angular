@@ -17,7 +17,7 @@ export class FlickrSearchService {
 
   //Appel de l'API Flickr pour une recherche globale
   //Les images sont au format JSON
-  getImagesFlickr(form: FormGroup) : Observable<photosInterface>{
+  getImagesFlickr(form: FormGroup, currentPage : Number) : Observable<photosInterface>{
     
     const keyword = form.value.keyword;
     // if (this.prevKeyword === keyword) {
@@ -27,7 +27,7 @@ export class FlickrSearchService {
     // }
     this.prevKeyword = keyword;
     const url ='https://www.flickr.com/services/rest/?method=flickr.photos.search&';
-    let params = `api_key=${environment.flickr.key}&text=${keyword}&format=json&nojsoncallback=1&per_page=${form.value.nbPhotos}&page=${this.currPage}`;
+    let params = `api_key=${environment.flickr.key}&text=${keyword}&format=json&nojsoncallback=1&per_page=${form.value.nbPhotos}&page=${currentPage}`;
 
     params = this.getFilters(params,form);
 

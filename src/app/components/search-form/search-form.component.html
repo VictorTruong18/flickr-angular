@@ -40,8 +40,17 @@
       <ng-template #other_content>Voila {{arr.length}} belles photos !</ng-template>
      <mat-slider *ngIf="arr.length > 0" class="centered" step="2" min="1" max="40" value="16" (input)="onInputChange($event)"></mat-slider>
 
+ 
      
+     <mat-button-toggle-group  *ngIf="arr.length > 0" name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle value="bold" (click)="this.pagePrescedente()">Page Prescedente</mat-button-toggle>
+      <mat-button-toggle value="bold" (click)="this.pageSuivante()">Page Suivante</mat-button-toggle>
+    </mat-button-toggle-group>
+
+     <h1  *ngIf="arr.length > 0">Numero de Page : {{ currentPage }}</h1>
 </div>
+
+
 
 
   

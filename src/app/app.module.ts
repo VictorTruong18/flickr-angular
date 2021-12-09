@@ -17,6 +17,8 @@ import { MatSliderModule } from '@angular/material/slider'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImageInfosComponent } from './pages/image-infos/image-infos.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +41,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatNativeDateModule,
     MatSliderModule,
     BrowserAnimationsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
