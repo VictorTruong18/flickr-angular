@@ -7,13 +7,21 @@
   }}_{{ image.photo.secret }}.jpg"
 />
 
-<p>Description: {{ image.photo.description._content }}</p>
-
-<div *ngIf="image.photo.tags.tag != null">
-  <h2>Tags:</h2>
-  <mat-chip-list>
-    <mat-chip *ngFor="let tag of image.photo.tags.tag">
-      {{ tag.raw }}
-    </mat-chip>
-  </mat-chip-list>
+<div *ngIf="image != null">
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Description">
+      <p style="margin: 40px;">{{ image.photo.description._content }}</p>
+    </mat-tab>
+    <mat-tab label="Tags">
+      <div style="margin: 40px;" *ngIf="image.photo.tags.tag != null">
+        <mat-chip-list>
+          <mat-chip *ngFor="let tag of image.photo.tags.tag">
+            {{ tag.raw }}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </mat-tab>
+    <mat-tab label="Comments">Comments</mat-tab>
+    <mat-tab label="User Profile SOON">it arrive soon</mat-tab>
+  </mat-tab-group>
 </div>
