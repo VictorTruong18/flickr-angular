@@ -16,9 +16,11 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImageInfosComponent } from './pages/image-infos/image-infos.component';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { MatChipsModule } from '@angular/material/chips';
     BrowserAnimationsModule,
     MatProgressBarModule,
     MatButtonToggleModule,
-    MatChipsModule
+    MatChipsModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
