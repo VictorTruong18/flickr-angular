@@ -11,6 +11,14 @@
   align-items: flex-start;
 }
 
+body {
+  background: linear-gradient(-45deg, 
+  rgba(246, 255, 0, .8),
+   rgba(255, 0, 161, .8)) fixed, 
+   url("https://www.teahub.io/photos/full/118-1184572_blue-mountain-state-wallpaper-data-src-mountain-background.jpg") fixed;
+  background-size: cover;
+}
+
 h1,
 h2,
 h3,
