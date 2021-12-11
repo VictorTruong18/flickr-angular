@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImageInfosComponent } from './pages/image-infos/image-infos.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatSliderModule,
     BrowserAnimationsModule,
     MatProgressBarModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
