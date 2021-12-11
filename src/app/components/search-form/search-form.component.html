@@ -1,47 +1,51 @@
 <div class="content" role="main">
-    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-      <mat-form-field class="" appearance="fill">
-        <mat-label>Your Search</mat-label>
-        <input
-          matInput
-          formControlName="keyword"
-          placeholder="Your search"
-          value=""
-        />
-      </mat-form-field>
-    
-      
-      <!--Min and Max Upload Date Filter -->
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="" appearance="fill">
+      <mat-label>Your Search</mat-label>
+      <input
+        matInput
+        formControlName="keyword"
+        placeholder="Your search"
+        value=""
+      />
+    </mat-form-field>
+
+    <!--Min and Max Upload Date Filter -->
     <mat-form-field appearance="fill">
       <mat-label>Minimum Upload Date</mat-label>
-      <input matInput [matDatepicker]="minDate" formControlName="min_upload_date">
+      <input
+        matInput
+        [matDatepicker]="minDate"
+        formControlName="min_upload_date"
+      />
       <mat-datepicker-toggle matSuffix [for]="minDate"></mat-datepicker-toggle>
       <mat-datepicker #minDate></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Maximum Upload Date</mat-label>
-      <input matInput [matDatepicker]="maxDate" formControlName="max_upload_date">
+      <input
+        matInput
+        [matDatepicker]="maxDate"
+        formControlName="max_upload_date"
+      />
       <mat-datepicker-toggle matSuffix [for]="maxDate"></mat-datepicker-toggle>
       <mat-datepicker #maxDate></mat-datepicker>
     </mat-form-field>
-    
+
     <mat-form-field class="" appearance="fill">
-      <input matInput formControlName="nbPhotos" 
-      placeholder="Number of photos per page (default : 50) " />
-      
+      <input
+        matInput
+        formControlName="nbPhotos"
+        placeholder="Number of photos per page (default : 50) "
+      />
     </mat-form-field>
 
     <mat-form-field class="" appearance="fill">
-        <mat-label>tags</mat-label>
-        <input
-          matInput
-          formControlName="tags"
-          placeholder="tags"
-          value=""
-        />
-      </mat-form-field>
-      <mat-form-field class="" appearance="fill">
+      <mat-label>tags</mat-label>
+      <input matInput formControlName="tags" placeholder="tags" value="" />
+    </mat-form-field>
+    <mat-form-field class="" appearance="fill">
       <mat-label>tag_mode</mat-label>
       <input
         matInput
@@ -51,35 +55,49 @@
       />
     </mat-form-field>
 
-      
-      <button mat-button color="primary">Search</button>
-     </form>
+    <button mat-button color="primary">Search</button>
+  </form>
 
-     <div *ngIf="arr.length == 0; else other_content">Faites une recherche et pleins de belles photos apparaitront</div>
-      <ng-template #other_content>Voila {{arr.length}} belles photos !</ng-template>
-     <mat-slider *ngIf="arr.length > 0" class="centered" step="2" min="1" max="40" value="16" (input)="onInputChange($event)"></mat-slider>
+  <div *ngIf="arr.length == 0; else other_content">
+    Faites une recherche et pleins de belles photos apparaitront
+  </div>
+  <ng-template #other_content
+    >Voila {{ arr.length }} belles photos !</ng-template
+  >
+  <mat-slider
+    *ngIf="arr.length > 0"
+    class="centered"
+    step="2"
+    min="1"
+    max="40"
+    value="16"
+    (input)="onInputChange($event)"
+  ></mat-slider>
 
- 
-     
-     <mat-button-toggle-group  *ngIf="arr.length > 0 || (currentPage > 1 && arr.length == 0)" name="fontStyle" aria-label="Font Style">
-      <mat-button-toggle value="bold" (click)="this.pagePrescedente()">Page Prescedente</mat-button-toggle>
-      <mat-button-toggle value="bold" (click)="this.pageSuivante()">Page Suivante</mat-button-toggle>
-    </mat-button-toggle-group>
+  <mat-button-toggle-group
+    *ngIf="arr.length > 0 || (currentPage > 1 && arr.length == 0)"
+    name="fontStyle"
+    aria-label="Font Style"
+  >
+    <mat-button-toggle value="bold" (click)="this.pagePrescedente()"
+      >Page Prescedente</mat-button-toggle
+    >
+    <mat-button-toggle value="bold" (click)="this.pageSuivante()"
+      >Page Suivante</mat-button-toggle
+    >
+  </mat-button-toggle-group>
 
-    <h1  *ngIf="( currentPage > 1 && arr.length == 0)">Aucune Photo sur cette page ! Revenir en arriere ? </h1>
+  <h1 *ngIf="currentPage > 1 && arr.length == 0">
+    Aucune Photo sur cette page ! Revenir en arriere ?
+  </h1>
 
-     <h1  *ngIf="arr.length > 0 ">Numero de Page : {{ currentPage }}</h1>
-     <mat-progress-bar   *ngIf="this.showProgressBar" mode="indeterminate"></mat-progress-bar>
-     
+  <h1 *ngIf="arr.length > 0">Numero de Page : {{ currentPage }}</h1>
+  <mat-progress-bar
+    *ngIf="this.showProgressBar"
+    mode="indeterminate"
+  ></mat-progress-bar>
 </div>
 
-
-
-
-  
 <div class="container">
   <app-images-list [images]="arr"></app-images-list>
-  </div>
-
- 
-
+</div>

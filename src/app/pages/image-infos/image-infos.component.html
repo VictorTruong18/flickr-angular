@@ -1,16 +1,20 @@
-
 <h1>Titre: {{ image.photo.title._content }}</h1>
 
-<img class="resizing" src="https://live.staticflickr.com/{{image.photo.server}}/{{image.photo.id}}_{{image.photo.secret}}.jpg"/>
+<img
+  class="resizing"
+  src="https://live.staticflickr.com/{{ image.photo.server }}/{{
+    image.photo.id
+  }}_{{ image.photo.secret }}.jpg"
+/>
 
 <p>Description: {{ image.photo.description._content }}</p>
 
 <div *ngIf="image.photo.tags.tag != null">
-    <h2>Tags: </h2>
-    <!-- <div *ngFor= "let tag of image.photo.tags.tag"> <span>{{tag.raw}}</span></div> -->
-    <mat-chip-list>
-        <mat-chip *ngFor= "let tag of image.photo.tags.tag">
-            {{tag.raw}}
-        </mat-chip>
-    </mat-chip-list>
+  <h2>Tags:</h2>
+  <!-- <div *ngFor= "let tag of image.photo.tags.tag"> <span>{{tag.raw}}</span></div> -->
+  <mat-chip-list>
+    <mat-chip *ngFor="let tag of image.photo.tags.tag">
+      {{ tag.raw }}
+    </mat-chip>
+  </mat-chip-list>
 </div>

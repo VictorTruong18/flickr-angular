@@ -4,14 +4,11 @@ import { ViewEncapsulation } from '@angular/core';
   selector: 'app-images-list',
   templateUrl: './images-list.component.html',
   styleUrls: ['./images-list.component.css'],
-  encapsulation: ViewEncapsulation.None
-
+  encapsulation: ViewEncapsulation.None,
 })
 export class ImagesListComponent implements OnInit {
-  @Input() images : any[] = [];
-  constructor() { }
+  @Input() images: any[] = [];
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
