@@ -54,8 +54,8 @@ export class SearchFormComponent implements OnInit {
 
   //Fonction qui est triggered des que l'utilisateur appuie sur Submit
    onSubmit(){
-     if(this.searchForm.value.keyword == this.previousKeyword){
-      this.previousKeyword = this.searchForm.value.keyword;
+    if(this.searchForm.value == this.previousKeyword){
+      this.previousKeyword = this.searchForm.value;
       this.showProgressBar = true;
       this.flickrService.getImagesFlickr(this.searchForm, this.currentPage).subscribe(
         
@@ -71,7 +71,7 @@ export class SearchFormComponent implements OnInit {
     );
   
     } else {
-      this.previousKeyword = this.searchForm.value.keyword;
+      this.previousKeyword = this.searchForm.value;
       this.currentPage = 1;
       this.showProgressBar = true;
       this.flickrService.getImagesFlickr(this.searchForm, this.currentPage).subscribe(
