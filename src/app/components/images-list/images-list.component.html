@@ -1,9 +1,5 @@
 <div class="container">
   <div *ngFor="let im of images">
-    <!-- <a routerLink="/{{ im.id }}">
-            <img class="resizing" src="https://live.staticflickr.com/{{im.server}}/{{im.id}}_{{im.secret}}.jpg"/>
-          </a> -->
-
     <app-image [image]="im"></app-image>
   </div>
 </div>
