@@ -27,7 +27,7 @@ export class FlickrSearchService {
     // }
     this.prevKeyword = keyword;
     const url ='https://www.flickr.com/services/rest/?method=flickr.photos.search&';
-    let params = `api_key=${environment.flickr.key}&text=${keyword}&format=json&nojsoncallback=1&per_page=${form.value.nbPhotos}&page=${currentPage}`;
+    let params = `api_key=${environment.flickr.key}&text=${keyword}&format=json&nojsoncallback=1&per_page=${form.value.nbPhotos}&page=${currentPage}&tags=${form.value.tags}&tag_mode=${form.value.tag_mode}`;
 
     params = this.getFilters(params,form);
 

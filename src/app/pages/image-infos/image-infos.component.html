@@ -1,7 +1,9 @@
 
-<h1>{{ image.photo.title._content }}</h1>
+<h1>Titre: {{ image.photo.title._content }}</h1>
 
 <img class="resizing" src="https://live.staticflickr.com/{{image.photo.server}}/{{image.photo.id}}_{{image.photo.secret}}.jpg"/>
 
-<p>{{ image.photo.description._content }}</p>
+<p>Description: {{ image.photo.description._content }}</p>
+<h2>Tags: </h2>
 
+<div *ngFor= "let tag of image.photo.tags.tag"> <span>{{tag.raw}}</span></div>

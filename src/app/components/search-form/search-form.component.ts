@@ -38,7 +38,8 @@ export class SearchFormComponent implements OnInit {
     min_upload_date: '',
     max_upload_date: '',
     nsfw: false,
-    tags: [],
+    tags: '',
+    tag_mode: '',
     nbPhotos: 50,
   })
 
