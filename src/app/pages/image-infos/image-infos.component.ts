@@ -12,6 +12,9 @@ export class ImageInfosComponent implements OnInit {
   imageId: any;
   image: imageInterface = {} as any as imageInterface;
   comments: commentsInterface = {} as any as commentsInterface;
+  user: userInterface = {} as any as userInterface;
+  userPhotos: photosInterface = {} as any as photosInterface;
+  
   showProgressBar : boolean = true;
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +30,19 @@ export class ImageInfosComponent implements OnInit {
         this.showProgressBar = false;
         this.image = data;
         console.log(data);
+        
+        this.flickrSearch.getInformationsUser(this.image.photo.owner.nsid).subscribe((data) => {
+          console.log("USER");
+          console.log(data);
+          this.user = data;
+        });
+
+        this.flickrSearch.getPhotosUser(this.image.photo.owner.nsid).subscribe((data) => {
+          console.log("photosUSER");
+          console.log(data);
+          this.userPhotos = data;
+        });
+
       }
     });
     this.flickrSearch.getComments(this.imageId).subscribe((data) => {
