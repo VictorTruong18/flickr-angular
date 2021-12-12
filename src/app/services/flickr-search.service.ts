@@ -94,10 +94,10 @@ export class FlickrSearchService {
     return this.http.get<photosInterface>(url + params);
   }
 
-  // getInformationsUser(user_id: string): Observable<userInterface> {
-  //   // https://www.flickr.com/services/rest/?method=flickr.people.getInfo&api_key=f13bf45b5485db7405ef5eda152ca951&user_id=56588665%40N00&format=json&nojsoncallback=1
-  //   const url = 'https://www.flickr.com/services/rest/?method=flickr.people.getInfo';
-  //   let params = `&api_key=${environment.flickr.key}&user_id=${user_id}&per_page=10&format=json&nojsoncallback=1`;
-  //   return this.http.get<userInterface>(url + params);
-  // }
+  getInformationsUser(user_id: string): Observable<userInterface> {
+    // https://www.flickr.com/services/rest/?method=flickr.people.getInfo&api_key=f13bf45b5485db7405ef5eda152ca951&user_id=56588665%40N00&format=json&nojsoncallback=1
+    const url = 'https://www.flickr.com/services/rest/?method=flickr.people.getInfo';
+    let params = `&api_key=${environment.flickr.key}&user_id=${user_id}&per_page=10&format=json&nojsoncallback=1`;
+    return this.http.get<userInterface>(url + params);
+  }
 }
