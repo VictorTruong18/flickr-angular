@@ -35,7 +35,7 @@ export class SearchFormComponent implements OnInit {
     tags: '',
     tag_mode: '',
     sort: '',
-    nbPhotos: 50,
+    nbPhotos: 250,
     fromGallery: false
   });
 

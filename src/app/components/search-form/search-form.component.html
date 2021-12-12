@@ -1,14 +1,59 @@
+
+
 <div class="content" role="main">
-  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-    <mat-form-field class="" appearance="fill">
-      <mat-label>Recherche par mots-clés</mat-label>
-      <input
+
+  <div *ngIf="arr.length == 0; else other_content">
+    <h2 style="color: azure;">Faites une recherche et pleins de belles photos apparaitront</h2>
+  </div>
+  <form style="padding-left: 10%; padding-right: 10%; " [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+    <mat-form-field style="width: 40%;"  class="" appearance="fill" >
+      <mat-label >Recherche par mots-clés</mat-label>
+      <input 
+
         matInput
         formControlName="keyword"
         placeholder="Your search"
         value=""
       />
     </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Trier par</mat-label>
+      <mat-select  formControlName="sort">
+        <mat-option value="relevance">Pertinence (decroissant)</mat-option>
+        <mat-option value="date-posted-asc">Date de Publication (croissant)</mat-option>
+        <mat-option value="date-posted-desc">Date de Publication (decroissant)</mat-option>
+        <mat-option value="interestingness-asc">Niveau d'interet (croissant)</mat-option>
+        <mat-option value="interestingness-desc">Niveau d'interet (decroissant)</mat-option>
+        
+      </mat-select> 
+    </mat-form-field>
+
+    
+    <mat-form-field class="" appearance="fill">
+      <mat-label>Tags</mat-label>
+      <input matInput formControlName="tags" placeholder="Séparez avec des virgules" value="" />
+    </mat-form-field>
+      
+   
+
+
+    <mat-form-field appearance="fill">
+      <mat-label>Tag Mode</mat-label>
+      <mat-select  formControlName="tag_mode">
+        <mat-option value="all">All</mat-option>
+        <mat-option value="any">Any (default)</mat-option>
+      </mat-select> 
+    </mat-form-field>
+
+    <mat-form-field class="" appearance="fill">
+      <input
+        matInput
+        formControlName="nbPhotos"
+        placeholder="Nombre de photos par page ( max : 500) "
+      />
+    </mat-form-field>
+
 
     <!--Min and Max Upload Date Filter -->
     <mat-form-field appearance="fill">
@@ -33,41 +78,10 @@
       <mat-datepicker #maxDate></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field class="" appearance="fill">
-      <input
-        matInput
-        formControlName="nbPhotos"
-        placeholder="Nombre de photos par page ( max : 500) "
-      />
-    </mat-form-field>
+    
 
-    <mat-form-field class="" appearance="fill">
-      <mat-label>Tags</mat-label>
-      <input matInput formControlName="tags" placeholder="Séparez avec des virgules" value="" />
-    </mat-form-field>
-      
-   
+    
 
-
-    <mat-form-field appearance="fill">
-      <mat-label>Tag Mode</mat-label>
-      <mat-select  formControlName="tag_mode">
-        <mat-option value="all">All</mat-option>
-        <mat-option value="any">Any (default)</mat-option>
-      </mat-select> 
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Trier par</mat-label>
-      <mat-select  formControlName="sort">
-        <mat-option value="relevance">Pertinence (decroissant)</mat-option>
-        <mat-option value="date-posted-asc">Date de Publication (croissant)</mat-option>
-        <mat-option value="date-posted-desc">Date de Publication (decroissant)</mat-option>
-        <mat-option value="interestingness-asc">Niveau d'interet (croissant)</mat-option>
-        <mat-option value="interestingness-desc">Niveau d'interet (decroissant)</mat-option>
-        
-      </mat-select> 
-    </mat-form-field>
 
   
 
@@ -85,9 +99,7 @@
     <button mat-stroked-button color="primary">Rechercher</button>
   </form>
 
-  <div *ngIf="arr.length == 0; else other_content">
-    <h2>Faites une recherche et pleins de belles photos apparaitront</h2>
-  </div>
+  
   <ng-template #other_content
     >Voila {{ arr.length }} belles photos !</ng-template
   >
@@ -96,8 +108,8 @@
     class="centered"
     step="2"
     min="1"
-    max="40"
-    value="16"
+    max="15"
+    value="10"
     (input)="onInputChange($event)"
   ></mat-slider>
 
