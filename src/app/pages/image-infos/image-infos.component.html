@@ -13,7 +13,7 @@
       <p style="margin: 40px;">{{ image.photo.description._content }}</p>
     </mat-tab>
     <mat-tab label="Tags">
-      <div style="margin: 40px;" *ngIf="image.photo.tags.tag != null">
+      <div style="margin: 40px;">
         <mat-chip-list>
           <mat-chip *ngFor="let tag of image.photo.tags.tag">
             {{ tag.raw }}
@@ -25,3 +25,11 @@
     <mat-tab label="User Profile SOON">it arrive soon</mat-tab>
   </mat-tab-group>
 </div>
+<p>
+  {{ image.photo.views }}
+  <mat-icon>remove_red_eye</mat-icon>
+</p>
+
+<p>{{ image.photo.dates.posted }}</p>
+<p>{{ image.photo.dates.taken }}</p>
+<p>{{ image.photo.owner.realname }}</p>

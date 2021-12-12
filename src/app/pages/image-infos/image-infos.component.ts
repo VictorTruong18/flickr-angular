@@ -22,6 +22,7 @@ export class ImageInfosComponent implements OnInit {
     this.flickrSearch.getImageInfo(this.imageId).subscribe((data) => {
       //L'image implemente l'interface et contient toutes les informations
       this.image = data;
+      console.log(data);
     });
   }
 }

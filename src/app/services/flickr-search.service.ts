@@ -41,7 +41,6 @@ export class FlickrSearchService {
     const url =
       'https://www.flickr.com/services/rest/?method=flickr.photos.getInfo&';
     let params = `&api_key=${environment.flickr.key}&photo_id=${id}&format=json&nojsoncallback=1`;
-    console.log(url + params);
     return this.http.get<imageInterface>(url + params);
   }
 
@@ -59,7 +58,33 @@ export class FlickrSearchService {
       maxUpload = maxUpload.toISOString().slice(0, 19).replace('T', ' ');
       params += `&max_upload_date=${maxUpload}`;
     }
-
     return params;
   }
+
+  getComments(id: string): Observable<commentsInterface> {
+    const url = 'https://www.flickr.com/services/rest/?method=flickr.photos.comments.getList&';
+    let params = `&api_key=${environment.flickr.key}&photo_id=${id}&format=json&nojsoncallback=1`;
+    return this.http.get<commentsInterface>(url + params);
+  }
+
+  getSize(id: string): Observable<sizesInterface> {
+    // https://www.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=f13bf45b5485db7405ef5eda152ca951&photo_id=51734392674&format=json&nojsoncallback=1
+    const url = 'https://www.flickr.com/services/rest/?method=flickr.photos.getSizes&';
+    let params = `&api_key=${environment.flickr.key}&photo_id=${id}&format=json&nojsoncallback=1`;
+    return this.http.get<sizesInterface>(url + params);
+  }
+
+  getPhotosUser(user_id: string): Observable<photosInterface> {
+    // https://www.flickr.com/services/rest/?method=flickr.people.getPhotos&api_key=f13bf45b5485db7405ef5eda152ca951&user_id=56588665%40N00&per_page=10&format=json&nojsoncallback=1
+    const url = 'https://www.flickr.com/services/rest/?method=flickr.people.getPhotos';
+    let params = `&api_key=${environment.flickr.key}&user_id=${user_id}&per_page=10&format=json&nojsoncallback=1`;
+    return this.http.get<photosInterface>(url + params);
+  }
+
+  // getInformationsUser(user_id: string): Observable<userInterface> {
+  //   // https://www.flickr.com/services/rest/?method=flickr.people.getInfo&api_key=f13bf45b5485db7405ef5eda152ca951&user_id=56588665%40N00&format=json&nojsoncallback=1
+  //   const url = 'https://www.flickr.com/services/rest/?method=flickr.people.getInfo';
+  //   let params = `&api_key=${environment.flickr.key}&user_id=${user_id}&per_page=10&format=json&nojsoncallback=1`;
+  //   return this.http.get<userInterface>(url + params);
+  // }
 }
