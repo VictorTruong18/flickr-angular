@@ -40,6 +40,7 @@ export class SearchFormComponent implements OnInit {
   currentPage: any = 1;
   previousKeyword: any = null;
   showProgressBar: boolean = false;
+  flickrTags = ['all', 'any (default)']
   constructor(
     private formBuilder: FormBuilder,
     private flickrService: FlickrSearchService

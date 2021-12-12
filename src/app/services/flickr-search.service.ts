@@ -28,7 +28,7 @@ export class FlickrSearchService {
     this.prevKeyword = keyword;
     const url =
       'https://www.flickr.com/services/rest/?method=flickr.photos.search&';
-    let params = `api_key=${environment.flickr.key}&text=${keyword}&format=json&nojsoncallback=1&per_page=${form.value.nbPhotos}&page=${currentPage}&tags=${form.value.tags}&tag_mode=${form.value.tag_mode}`;
+    let params = `api_key=${environment.flickr.key}&text=${keyword}&format=json&nojsoncallback=1&per_page=${form.value.nbPhotos}&page=${currentPage}`;
 
     params = this.getFilters(params, form);
 
@@ -50,6 +50,8 @@ export class FlickrSearchService {
   getFilters(params: string, form: FormGroup) {
     let minUpload = form.value.min_upload_date;
     let maxUpload = form.value.max_upload_date;
+    let tags = form.value.tags;
+    let tag_mode = form.value.tag_mode;
     if (minUpload) {
       minUpload = minUpload.toISOString().slice(0, 19).replace('T', ' ');
       params += `&min_upload_date=${minUpload}`;
@@ -58,6 +60,13 @@ export class FlickrSearchService {
       maxUpload = maxUpload.toISOString().slice(0, 19).replace('T', ' ');
       params += `&max_upload_date=${maxUpload}`;
     }
+    if (tags) {
+      params += `&tags=${form.value.tags}`;
+    } 
+    if (tag_mode) {
+      params += `&tag_mode=${form.value.tag_mode}`;
+    }
+    
     return params;
   }
 

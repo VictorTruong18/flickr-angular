@@ -45,14 +45,14 @@
       <mat-label>tags</mat-label>
       <input matInput formControlName="tags" placeholder="tags" value="" />
     </mat-form-field>
-    <mat-form-field class="" appearance="fill">
-      <mat-label>tag_mode</mat-label>
-      <input
-        matInput
-        formControlName="tag_mode"
-        placeholder="tag_mode"
-        value=""
-      />
+   
+
+    <mat-form-field appearance="fill">
+      <mat-label>Tag mode</mat-label>
+      <mat-select  formControlName="tag_mode">
+        <mat-option value="one">All</mat-option>
+        <mat-option value="two">Any (default)</mat-option>
+      </mat-select> 
     </mat-form-field>
 
     <button mat-stroked-button color="primary">Search</button>
@@ -90,6 +90,8 @@
   <h1 *ngIf="currentPage > 1 && arr.length == 0">
     Aucune Photo sur cette page ! Revenir en arriere ?
   </h1>
+
+
 
   <h1 *ngIf="arr.length > 0">Numero de Page : {{ currentPage }}</h1>
   <mat-progress-bar
