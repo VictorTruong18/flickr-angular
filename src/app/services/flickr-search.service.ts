@@ -73,8 +73,6 @@ export class FlickrSearchService {
     if(sort){
       params += `&sort=${sort}`;
     }
-    
-    
     return params;
   }
 
