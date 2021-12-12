@@ -42,16 +42,29 @@
     </mat-form-field>
 
     <mat-form-field class="" appearance="fill">
-      <mat-label>tags</mat-label>
+      <mat-label>Tags</mat-label>
       <input matInput formControlName="tags" placeholder="tags" value="" />
     </mat-form-field>
+      
    
+
 
     <mat-form-field appearance="fill">
       <mat-label>Tag mode</mat-label>
       <mat-select  formControlName="tag_mode">
-        <mat-option value="one">All</mat-option>
-        <mat-option value="two">Any (default)</mat-option>
+        <mat-option value="all">All</mat-option>
+        <mat-option value="any">Any (default)</mat-option>
+      </mat-select> 
+    </mat-form-field>
+
+  
+
+    <mat-form-field appearance="fill">
+      <mat-label>NSFW ( search safety )</mat-label>
+      <mat-select  formControlName="nsfw">
+        <mat-option value="1">Safe ( default )</mat-option>
+        <mat-option value="2">Moderate</mat-option>
+        <mat-option value="3">Restricted</mat-option>
       </mat-select> 
     </mat-form-field>
 
