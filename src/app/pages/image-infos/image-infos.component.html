@@ -1,11 +1,16 @@
 <h1 class="title">{{ image.photo.title._content }}</h1>
 
+
+
+
 <img
   class="img-centered"
   src="https://live.staticflickr.com/{{ image.photo.server }}/{{
     image.photo.id
   }}_{{ image.photo.secret }}.jpg"
 />
+
+
 
 <div *ngIf="image != null">
   <mat-tab-group mat-align-tabs="center">
@@ -27,8 +32,10 @@
 </div>
 <p>
   {{ image.photo.views }}
-  <mat-icon>remove_red_eye</mat-icon>
+  <mat-icon></mat-icon>
 </p>
+
+
 
 <p>{{ image.photo.dates.posted }}</p>
 <p>{{ image.photo.dates.taken }}</p>

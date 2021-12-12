@@ -20,11 +20,6 @@ export class FlickrSearchService {
     currentPage: Number
   ): Observable<photosInterface> {
     const keyword = form.value.keyword;
-    // if (this.prevKeyword === keyword) {
-    //   this.currPage++;
-    // } else {
-    //   this.currPage = 1;
-    // }
     this.prevKeyword = keyword;
     const url =
       'https://www.flickr.com/services/rest/?method=flickr.photos.search&';
@@ -47,13 +42,13 @@ export class FlickrSearchService {
 
   //Appel de l'API Flickr pour rechercher les informations
   //Les images sont au format JSON
-
   getFilters(params: string, form: FormGroup) {
     let minUpload = form.value.min_upload_date;
     let maxUpload = form.value.max_upload_date;
     let tags = form.value.tags;
     let tag_mode = form.value.tag_mode;
     let nsfw = form.value.nsfw;
+    let fromGallery = form.value.fromGallery;
     if (minUpload) {
       minUpload = minUpload.toISOString().slice(0, 19).replace('T', ' ');
       params += `&min_upload_date=${minUpload}`;
@@ -70,6 +65,9 @@ export class FlickrSearchService {
     }
     if (nsfw) {
       params += `&safe_search=${form.value.nsfw}`;
+    }
+    if (fromGallery){
+      params += `&in_gallery=1`;
     }
     
     

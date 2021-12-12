@@ -31,6 +31,7 @@ interface imageInterface {
     comments: Comments;
     tags: Tags;
   };
+  stat: string;
 }
 
 interface Owner {

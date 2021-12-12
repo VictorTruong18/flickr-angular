@@ -11,18 +11,23 @@ import { FlickrSearchService } from '../../services/flickr-search.service';
 export class ImageInfosComponent implements OnInit {
   imageId: any;
   image: imageInterface = {} as any as imageInterface;
-
+  showProgressBar : boolean = true;
   constructor(
     private route: ActivatedRoute,
-    private flickrSearch: FlickrSearchService
+    private flickrSearch: FlickrSearchService,
+    
   ) {}
 
   ngOnInit(): void {
     this.imageId = this.route.snapshot.paramMap.get('id');
+    this.showProgressBar = true;
     this.flickrSearch.getImageInfo(this.imageId).subscribe((data) => {
       //L'image implemente l'interface et contient toutes les informations
-      this.image = data;
-      console.log(data);
+      if (data.stat == 'ok') {
+        this.showProgressBar = false;
+        this.image = data;
+        console.log(data);
+      }
     });
   }
 }

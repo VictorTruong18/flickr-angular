@@ -50,7 +50,7 @@
 
 
     <mat-form-field appearance="fill">
-      <mat-label>Tag mode</mat-label>
+      <mat-label>Tag Mode</mat-label>
       <mat-select  formControlName="tag_mode">
         <mat-option value="all">All</mat-option>
         <mat-option value="any">Any (default)</mat-option>
@@ -67,6 +67,8 @@
         <mat-option value="3">Restricted</mat-option>
       </mat-select> 
     </mat-form-field>
+
+    <mat-checkbox class="" formControlName="fromGallery">From Gallery</mat-checkbox>
 
     <button mat-stroked-button color="primary">Search</button>
   </form>

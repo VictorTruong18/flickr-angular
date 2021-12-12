@@ -35,6 +35,7 @@ export class SearchFormComponent implements OnInit {
     tags: '',
     tag_mode: '',
     nbPhotos: 50,
+    fromGallery: false
   });
 
   currentPage: any = 1;
@@ -61,7 +62,7 @@ export class SearchFormComponent implements OnInit {
             this.showProgressBar = false;
             this.arr = data.photos.photo;
             shuffle(this.arr);
-            console.log('Toutes les images ' + this.arr);
+            console.log('Toutes l es images ' + this.arr);
           }
         });
     } else {
