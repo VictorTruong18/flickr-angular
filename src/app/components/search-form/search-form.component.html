@@ -3,9 +3,9 @@
 <div class="content" role="main">
 
   <div *ngIf="arr.length == 0; else other_content">
-    <h2 style="color: azure;">Faites une recherche et pleins de belles photos apparaitront</h2>
+    <!-- <h2 style="color: azure;">Faites une recherche et pleins de belles photos apparaitront</h2> -->
   </div>
-  <form style="padding-left: 10%; padding-right: 10%; " [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <form style="padding-left: 10%; padding-right: 10%; padding-top: 2%;" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
     <mat-form-field style="width: 40%;"  class="" appearance="fill" >
       <mat-label >Recherche par mots-clés</mat-label>
       <input 
@@ -109,7 +109,7 @@
     step="2"
     min="1"
     max="15"
-    value="10"
+    value="7"
     (input)="onInputChange($event)"
   ></mat-slider>
 
@@ -134,6 +134,7 @@
 
   <h1 *ngIf="arr.length > 0">Numero de Page : {{ currentPage }}</h1>
   <mat-progress-bar
+  style="width:70%"
     *ngIf="this.showProgressBar"
     mode="indeterminate"
   ></mat-progress-bar>
