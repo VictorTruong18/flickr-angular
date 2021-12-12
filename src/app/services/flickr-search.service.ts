@@ -49,6 +49,7 @@ export class FlickrSearchService {
     let tag_mode = form.value.tag_mode;
     let nsfw = form.value.nsfw;
     let fromGallery = form.value.fromGallery;
+    let sort = form.value.sort;
     if (minUpload) {
       minUpload = minUpload.toISOString().slice(0, 19).replace('T', ' ');
       params += `&min_upload_date=${minUpload}`;
@@ -58,16 +59,19 @@ export class FlickrSearchService {
       params += `&max_upload_date=${maxUpload}`;
     }
     if (tags) {
-      params += `&tags=${form.value.tags}`;
+      params += `&tags=${tags}`;
     } 
     if (tag_mode) {
-      params += `&tag_mode=${form.value.tag_mode}`;
+      params += `&tag_mode=${tag_mode}`;
     }
     if (nsfw) {
-      params += `&safe_search=${form.value.nsfw}`;
+      params += `&safe_search=${nsfw}`;
     }
     if (fromGallery){
       params += `&in_gallery=1`;
+    }
+    if(sort){
+      params += `&sort=${sort}`;
     }
     
     

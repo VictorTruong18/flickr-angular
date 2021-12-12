@@ -1,7 +1,7 @@
 <div class="content" role="main">
   <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
     <mat-form-field class="" appearance="fill">
-      <mat-label>Your Search</mat-label>
+      <mat-label>Recherche par mots-clés</mat-label>
       <input
         matInput
         formControlName="keyword"
@@ -12,7 +12,7 @@
 
     <!--Min and Max Upload Date Filter -->
     <mat-form-field appearance="fill">
-      <mat-label>Minimum Upload Date</mat-label>
+      <mat-label>Date minimum de publication</mat-label>
       <input
         matInput
         [matDatepicker]="minDate"
@@ -23,7 +23,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Maximum Upload Date</mat-label>
+      <mat-label>Date maximum de publication</mat-label>
       <input
         matInput
         [matDatepicker]="maxDate"
@@ -37,13 +37,13 @@
       <input
         matInput
         formControlName="nbPhotos"
-        placeholder="Number of photos per page (default : 50) "
+        placeholder="Nombre de photos par page ( max : 500) "
       />
     </mat-form-field>
 
     <mat-form-field class="" appearance="fill">
       <mat-label>Tags</mat-label>
-      <input matInput formControlName="tags" placeholder="tags" value="" />
+      <input matInput formControlName="tags" placeholder="Séparez avec des virgules" value="" />
     </mat-form-field>
       
    
@@ -57,24 +57,36 @@
       </mat-select> 
     </mat-form-field>
 
-  
-
     <mat-form-field appearance="fill">
-      <mat-label>NSFW ( search safety )</mat-label>
-      <mat-select  formControlName="nsfw">
-        <mat-option value="1">Safe ( default )</mat-option>
-        <mat-option value="2">Moderate</mat-option>
-        <mat-option value="3">Restricted</mat-option>
+      <mat-label>Trier par</mat-label>
+      <mat-select  formControlName="sort">
+        <mat-option value="relevance">Pertinence (decroissant)</mat-option>
+        <mat-option value="date-posted-asc">Date de Publication (croissant)</mat-option>
+        <mat-option value="date-posted-desc">Date de Publication (decroissant)</mat-option>
+        <mat-option value="interestingness-asc">Niveau d'interet (croissant)</mat-option>
+        <mat-option value="interestingness-desc">Niveau d'interet (decroissant)</mat-option>
+        
       </mat-select> 
     </mat-form-field>
 
-    <mat-checkbox class="" formControlName="fromGallery">From Gallery</mat-checkbox>
+  
 
-    <button mat-stroked-button color="primary">Search</button>
+    <mat-form-field appearance="fill">
+      <mat-label>NSFW</mat-label>
+      <mat-select  formControlName="nsfw">
+        <mat-option value="1">Sûre ( par defaut )</mat-option>
+        <mat-option value="2">Modéré</mat-option>
+        <mat-option value="3">Restraint</mat-option>
+      </mat-select> 
+    </mat-form-field>
+
+    <mat-checkbox class="" formControlName="fromGallery">Appartient à une galerie</mat-checkbox>
+
+    <button mat-stroked-button color="primary">Rechercher</button>
   </form>
 
   <div *ngIf="arr.length == 0; else other_content">
-    Faites une recherche et pleins de belles photos apparaitront
+    <h2>Faites une recherche et pleins de belles photos apparaitront</h2>
   </div>
   <ng-template #other_content
     >Voila {{ arr.length }} belles photos !</ng-template

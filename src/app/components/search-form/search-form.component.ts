@@ -34,6 +34,7 @@ export class SearchFormComponent implements OnInit {
     nsfw: '',
     tags: '',
     tag_mode: '',
+    sort: '',
     nbPhotos: 50,
     fromGallery: false
   });
@@ -41,7 +42,7 @@ export class SearchFormComponent implements OnInit {
   currentPage: any = 1;
   previousKeyword: any = null;
   showProgressBar: boolean = false;
-  flickrTags = ['all', 'any (default)']
+ 
   constructor(
     private formBuilder: FormBuilder,
     private flickrService: FlickrSearchService
