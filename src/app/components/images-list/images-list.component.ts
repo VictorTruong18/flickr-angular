@@ -8,6 +8,8 @@ import { ViewEncapsulation } from '@angular/core';
 })
 export class ImagesListComponent implements OnInit {
   @Input() images: any[] = [];
+  @Input() size: String = "";
+
   constructor() {}
 
   ngOnInit(): void {}

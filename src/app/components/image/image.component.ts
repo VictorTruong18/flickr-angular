@@ -9,6 +9,7 @@ import { ViewEncapsulation } from '@angular/core';
 })
 export class ImageComponent implements OnInit {
   @Input() image: any;
+  @Input() size: String = "";
 
   constructor() {}
 

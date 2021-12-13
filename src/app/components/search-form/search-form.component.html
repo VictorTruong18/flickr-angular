@@ -93,6 +93,13 @@
         <mat-option value="3">Restraint</mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Taille</mat-label>
+      <mat-select formControlName="size">
+        <mat-option value="s">75x75</mat-option>
+        <mat-option value="q">150x150</mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <mat-checkbox class="" formControlName="fromGallery"
       >Appartient à une galerie</mat-checkbox
@@ -140,5 +147,5 @@
 </div>
 
 <div class="container">
-  <app-images-list [images]="arr"></app-images-list>
+  <app-images-list [size]="this.searchForm.value.size" [images]="arr"></app-images-list>
 </div>
