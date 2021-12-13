@@ -15,7 +15,7 @@
 <div *ngIf="image != null">
   <mat-tab-group mat-align-tabs="center">
     <mat-tab label="Description">
-      <p style="margin: 40px">{{ image.photo.description._content }}</p>
+      <p style="margin: 40px" [innerHTML]="image.photo.description._content"></p>
     </mat-tab>
     <mat-tab label="Tags">
       <div style="margin: 40px">
