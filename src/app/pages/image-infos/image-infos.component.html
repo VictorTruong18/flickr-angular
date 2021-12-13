@@ -44,9 +44,8 @@
         <h3>Description :</h3>
         <p [innerHTML]="user.person.description._content"></p>
         <h3>Certaines de ses publications :</h3>
-        <div *ngFor="let image of userPhotos.photos.photo">
-            <app-image [image]="image"></app-image>
-         
+        <div class="container">
+          <app-images-list [images]="userPhotos.photos.photo"></app-images-list>
         </div>
       </div>
     </mat-tab>
