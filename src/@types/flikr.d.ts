@@ -142,3 +142,14 @@ interface userInterface {
 interface Content {
   _content: String;
 }
+
+interface GeoPosition {
+  photo: Location;
+}
+
+interface Location {
+  latitude:String;
+  longitude:String;
+  accuracy:String;
+  context:String;
+}

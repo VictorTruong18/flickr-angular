@@ -106,4 +106,11 @@ export class FlickrSearchService {
     let params = `&api_key=${environment.flickr.key}&user_id=${user_id}&per_page=10&format=json&nojsoncallback=1`;
     return this.http.get<userInterface>(url + params);
   }
+
+  getGeocalisation(id: string): Observable<GeoPosition>{
+    const url =
+      'https://www.flickr.com/services/rest/?method=flickr.photos.geo.getLocation';
+    let params = `&api_key=${environment.flickr.key}&photo_id=${id}&format=json&nojsoncallback=1`;
+    return this.http.get<GeoPosition>(url + params);
+  }
 }
