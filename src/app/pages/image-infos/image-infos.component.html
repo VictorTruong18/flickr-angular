@@ -45,14 +45,8 @@
         <p [innerHTML]="user.person.description._content"></p>
         <h3>Certaines de ses publications :</h3>
         <div *ngFor="let image of userPhotos.photos.photo">
-          <a routerLink="/{{ image.id }}">
-            <img
-              class="resizing"
-              src="https://live.staticflickr.com/{{ image.server }}/{{
-                image.id
-              }}_{{ image.secret }}.jpg"
-            />
-          </a>
+            <app-image [image]="image"></app-image>
+         
         </div>
       </div>
     </mat-tab>
