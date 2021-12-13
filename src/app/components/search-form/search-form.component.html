@@ -1,15 +1,15 @@
-
-
 <div class="content" role="main">
-
   <div *ngIf="arr.length == 0; else other_content">
     <!-- <h2 style="color: azure;">Faites une recherche et pleins de belles photos apparaitront</h2> -->
   </div>
-  <form style="padding-left: 10%; padding-right: 10%; padding-top: 2%;" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-    <mat-form-field style="width: 40%;"  class="" appearance="fill" >
-      <mat-label >Recherche par mots-clés</mat-label>
-      <input 
-
+  <form
+    style="padding-left: 10%; padding-right: 10%; padding-top: 2%"
+    [formGroup]="searchForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <mat-form-field style="width: 40%" class="" appearance="fill">
+      <mat-label>Recherche par mots-clés</mat-label>
+      <input
         matInput
         formControlName="keyword"
         placeholder="Your search"
@@ -19,31 +19,39 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Trier par</mat-label>
-      <mat-select  formControlName="sort">
+      <mat-select formControlName="sort">
         <mat-option value="relevance">Pertinence (decroissant)</mat-option>
-        <mat-option value="date-posted-asc">Date de Publication (croissant)</mat-option>
-        <mat-option value="date-posted-desc">Date de Publication (decroissant)</mat-option>
-        <mat-option value="interestingness-asc">Niveau d'interet (croissant)</mat-option>
-        <mat-option value="interestingness-desc">Niveau d'interet (decroissant)</mat-option>
-        
-      </mat-select> 
+        <mat-option value="date-posted-asc"
+          >Date de Publication (croissant)</mat-option
+        >
+        <mat-option value="date-posted-desc"
+          >Date de Publication (decroissant)</mat-option
+        >
+        <mat-option value="interestingness-asc"
+          >Niveau d'interet (croissant)</mat-option
+        >
+        <mat-option value="interestingness-desc"
+          >Niveau d'interet (decroissant)</mat-option
+        >
+      </mat-select>
     </mat-form-field>
 
-    
     <mat-form-field class="" appearance="fill">
       <mat-label>Tags</mat-label>
-      <input matInput formControlName="tags" placeholder="Séparez avec des virgules" value="" />
+      <input
+        matInput
+        formControlName="tags"
+        placeholder="Séparez avec des virgules"
+        value=""
+      />
     </mat-form-field>
-      
-   
-
 
     <mat-form-field appearance="fill">
       <mat-label>Tag Mode</mat-label>
-      <mat-select  formControlName="tag_mode">
+      <mat-select formControlName="tag_mode">
         <mat-option value="all">All</mat-option>
         <mat-option value="any">Any (default)</mat-option>
-      </mat-select> 
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field class="" appearance="fill">
@@ -53,7 +61,6 @@
         placeholder="Nombre de photos par page ( max : 500) "
       />
     </mat-form-field>
-
 
     <!--Min and Max Upload Date Filter -->
     <mat-form-field appearance="fill">
@@ -78,28 +85,22 @@
       <mat-datepicker #maxDate></mat-datepicker>
     </mat-form-field>
 
-    
-
-    
-
-
-  
-
     <mat-form-field appearance="fill">
       <mat-label>NSFW</mat-label>
-      <mat-select  formControlName="nsfw">
+      <mat-select formControlName="nsfw">
         <mat-option value="1">Sûre ( par defaut )</mat-option>
         <mat-option value="2">Modéré</mat-option>
         <mat-option value="3">Restraint</mat-option>
-      </mat-select> 
+      </mat-select>
     </mat-form-field>
 
-    <mat-checkbox class="" formControlName="fromGallery">Appartient à une galerie</mat-checkbox>
+    <mat-checkbox class="" formControlName="fromGallery"
+      >Appartient à une galerie</mat-checkbox
+    >
 
     <button mat-stroked-button color="primary">Rechercher</button>
   </form>
 
-  
   <ng-template #other_content
     >Voila {{ arr.length }} belles photos !</ng-template
   >
@@ -130,11 +131,9 @@
     Aucune Photo sur cette page ! Revenir en arriere ?
   </h1>
 
-
-
   <h1 *ngIf="arr.length > 0">Numero de Page : {{ currentPage }}</h1>
   <mat-progress-bar
-  style="width:70%"
+    style="width: 70%"
     *ngIf="this.showProgressBar"
     mode="indeterminate"
   ></mat-progress-bar>

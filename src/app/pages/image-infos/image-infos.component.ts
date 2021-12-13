@@ -14,11 +14,11 @@ export class ImageInfosComponent implements OnInit {
   comments: commentsInterface = {} as any as commentsInterface;
   user: userInterface = {} as any as userInterface;
   userPhotos: photosInterface = {} as any as photosInterface;
-  
-  showProgressBar : boolean = true;
+
+  showProgressBar: boolean = true;
   constructor(
     private route: ActivatedRoute,
-    private flickrSearch: FlickrSearchService,
+    private flickrSearch: FlickrSearchService
   ) {}
 
   ngOnInit(): void {
@@ -30,13 +30,17 @@ export class ImageInfosComponent implements OnInit {
         this.showProgressBar = false;
         this.image = data;
 
-        this.flickrSearch.getInformationsUser(this.image.photo.owner.nsid).subscribe((data) => {
-          this.user = data;
-        });
+        this.flickrSearch
+          .getInformationsUser(this.image.photo.owner.nsid)
+          .subscribe((data) => {
+            this.user = data;
+          });
 
-        this.flickrSearch.getPhotosUser(this.image.photo.owner.nsid).subscribe((data) => {
-          this.userPhotos = data;
-        });
+        this.flickrSearch
+          .getPhotosUser(this.image.photo.owner.nsid)
+          .subscribe((data) => {
+            this.userPhotos = data;
+          });
       }
     });
     this.flickrSearch.getComments(this.imageId).subscribe((data) => {

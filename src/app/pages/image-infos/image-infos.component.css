@@ -1,12 +1,11 @@
 .title {
-    text-align: center;
-    margin: 20px;
+  text-align: center;
+  margin: 20px;
 }
 
 .img-centered {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
 }
-

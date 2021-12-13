@@ -36,13 +36,13 @@ export class SearchFormComponent implements OnInit {
     tag_mode: '',
     sort: '',
     nbPhotos: 250,
-    fromGallery: false
+    fromGallery: false,
   });
 
   currentPage: any = 1;
   previousKeyword: any = null;
   showProgressBar: boolean = false;
- 
+
   constructor(
     private formBuilder: FormBuilder,
     private flickrService: FlickrSearchService
