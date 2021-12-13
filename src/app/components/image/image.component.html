@@ -1,9 +1,19 @@
-<div class="img-holder">
+<div *ngIf="size" class="img-holder">
   <a href="/{{ image.id }}">
     <img class="resizing" 
       src="https://live.staticflickr.com/{{ image.server }}/{{ image.id }}_{{
         image.secret
       }}_{{ size }}.jpg"
+    />
+  </a>
+</div>
+
+<div *ngIf="!size" class="img-holder">
+  <a href="/{{ image.id }}">
+    <img class="resizing" 
+      src="https://live.staticflickr.com/{{ image.server }}/{{ image.id }}_{{
+        image.secret
+      }}.jpg"
     />
   </a>
 </div>

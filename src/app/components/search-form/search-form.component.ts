@@ -60,6 +60,7 @@ export class SearchFormComponent implements OnInit {
         .getImagesFlickr(this.searchForm, this.currentPage)
         .subscribe((data) => {
           if (data.stat == 'ok') {
+            
             this.showProgressBar = false;
             this.arr = data.photos.photo;
             shuffle(this.arr);
@@ -74,9 +75,25 @@ export class SearchFormComponent implements OnInit {
         .getImagesFlickr(this.searchForm, this.currentPage)
         .subscribe((data) => {
           if (data.stat == 'ok') {
-            this.showProgressBar = false;
-            this.arr = data.photos.photo;
-            shuffle(this.arr);
+            if(this.searchForm.value.size){
+              var sizeArr : any = [];
+              for (let i = 0; i < data.photos.photo.length; i++) {
+                this.flickrService.getSize(data.photos.photo[i].id).subscribe((res) => {
+                  for (let j = 0; j < res.sizes.size.length; j++) {
+                    if(sizes[this.searchForm.value.size] == res.sizes.size[j].width ||  sizes[this.searchForm.value.size] == res.sizes.size[j].height){
+                      sizeArr.push(data.photos.photo[i]);
+                    }
+                  }
+                })
+              }
+              this.showProgressBar = false;
+              this.arr = sizeArr;
+              shuffle(this.arr);
+            } else {
+              this.showProgressBar = false;
+              this.arr = data.photos.photo;
+              shuffle(this.arr);
+            }
           }
         });
     }
@@ -98,4 +115,16 @@ export class SearchFormComponent implements OnInit {
 
 function shuffle(array: any) {
   array.sort(() => Math.random() - 0.5);
+}
+
+var sizes : any = {
+  "s": 75,
+  "q": 150,
+  "t": 100,
+  "m": 240,
+  "n": 320,
+  "w": 400,
+  "z": 640,
+  "c": 800,
+  "b": 1024
 }
