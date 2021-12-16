@@ -5,6 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import { FlickrSearchService } from '../../services/flickr-search.service';
 import { MatSliderChange } from '@angular/material/slider';
 import { ViewEncapsulation } from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-search-form',
@@ -45,7 +46,8 @@ export class SearchFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private flickrService: FlickrSearchService
+    private flickrService: FlickrSearchService,
+    private snackBar : MatSnackBar
   ) {}
 
   ngOnInit(): void {}
@@ -53,54 +55,59 @@ export class SearchFormComponent implements OnInit {
 
   //Fonction qui est triggered des que l'utilisateur appuie sur Submit
   onSubmit() {
-    if (this.searchForm.value == this.previousKeyword) {
-      this.previousKeyword = this.searchForm.value;
-      this.showProgressBar = true;
-      this.flickrService
-        .getImagesFlickr(this.searchForm, this.currentPage)
-        .subscribe((data) => {
-          if (data.stat == 'ok') {
-            
-            this.showProgressBar = false;
-            this.arr = data.photos.photo;
-            shuffle(this.arr);
-            console.log('Toutes l es images ' + this.arr);
-          }
-        });
-    } else {
-      this.previousKeyword = this.searchForm.value;
-      this.currentPage = 1;
-      this.showProgressBar = true;
-      this.flickrService
-        .getImagesFlickr(this.searchForm, this.currentPage)
-        .subscribe((data) => {
-          if (data.stat == 'ok') {
-            if(this.searchForm.value.size){
-              var sizeArr : any = [];
-              for (let i = 0; i < data.photos.photo.length; i++) {
-                this.flickrService.getSize(data.photos.photo[i].id).subscribe((res) => {
-                  for (let j = 0; j < res.sizes.size.length; j++) {
-                    if(sizes[this.searchForm.value.size] == res.sizes.size[j].width ||  sizes[this.searchForm.value.size] == res.sizes.size[j].height){
-                      sizeArr.push(data.photos.photo[i]);
-                    }
-                  }
-                })
-              }
-              this.showProgressBar = false;
-              this.arr = sizeArr;
-              shuffle(this.arr);
-            } else {
+    if(this.searchForm.value.keyword){
+      if (this.searchForm.value == this.previousKeyword) {
+        this.previousKeyword = this.searchForm.value;
+        this.showProgressBar = true;
+        this.flickrService
+          .getImagesFlickr(this.searchForm, this.currentPage)
+          .subscribe((data) => {
+            if (data.stat == 'ok') {
+              
               this.showProgressBar = false;
               this.arr = data.photos.photo;
               shuffle(this.arr);
+              console.log('Toutes l es images ' + this.arr);
             }
-          }
-        });
+          });
+      } else {
+        this.previousKeyword = this.searchForm.value;
+        this.currentPage = 1;
+        this.showProgressBar = true;
+        this.flickrService
+          .getImagesFlickr(this.searchForm, this.currentPage)
+          .subscribe((data) => {
+            if (data.stat == 'ok') {
+              if(this.searchForm.value.size){
+                var sizeArr : any = [];
+                for (let i = 0; i < data.photos.photo.length; i++) {
+                  this.flickrService.getSize(data.photos.photo[i].id).subscribe((res) => {
+                    for (let j = 0; j < res.sizes.size.length; j++) {
+                      if(sizes[this.searchForm.value.size] == res.sizes.size[j].width ||  sizes[this.searchForm.value.size] == res.sizes.size[j].height){
+                        sizeArr.push(data.photos.photo[i]);
+                      }
+                    }
+                  })
+                }
+                this.showProgressBar = false;
+                this.arr = sizeArr;
+                shuffle(this.arr);
+              } else {
+                this.showProgressBar = false;
+                this.arr = data.photos.photo;
+                shuffle(this.arr);
+              }
+            }
+          });
+      }
+    } else {
+      this.snackBar.open("Erreur","Veuillez indiquer un nom dans votre recherche",{duration: 3000});
     }
   }
 
   pagePrescedente() {
     if (this.currentPage == 1) {
+      this.snackBar.open("Erreur","Pas de pages prescedentes", {duration: 3000});
     } else {
       this.currentPage -= 1;
       this.onSubmit();
