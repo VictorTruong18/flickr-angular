@@ -56,6 +56,10 @@ export class SearchFormComponent implements OnInit {
   //Fonction qui est triggered des que l'utilisateur appuie sur Submit
   onSubmit() {
     if(this.searchForm.value.keyword){
+      if(this.searchForm.value.nbPhotos > 500){
+        this.snackBar.open("Erreur","Le nombre de photos par page est limité à 500 par page ", {duration: 3000});
+      }
+
       if (this.searchForm.value == this.previousKeyword) {
         this.previousKeyword = this.searchForm.value;
         this.showProgressBar = true;
