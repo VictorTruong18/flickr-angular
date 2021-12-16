@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { ActivatedRoute } from '@angular/router';
 import { FlickrSearchService } from '../../services/flickr-search.service';
-
+import * as mapboxgl from 'mapbox-gl';
+import "mapbox-gl/dist/mapbox-gl.css";
 @Component({
   selector: 'app-image-infos',
   templateUrl: './image-infos.component.html',
@@ -16,6 +17,10 @@ export class ImageInfosComponent implements OnInit {
   userPhotos: photosInterface = {} as any as photosInterface;
 
   showProgressBar: boolean = true;
+
+  map?: mapboxgl.Map;
+  @ViewChild('map') mapElement?: ElementRef;
+
   constructor(
     private route: ActivatedRoute,
     private flickrSearch: FlickrSearchService
@@ -46,5 +51,19 @@ export class ImageInfosComponent implements OnInit {
     this.flickrSearch.getComments(this.imageId).subscribe((data) => {
       this.comments = data;
     });
+  }
+  ngAfterViewInit() {
+    if (this.mapElement) {
+
+      this.map = new mapboxgl.Map({
+        accessToken: 'pk.eyJ1IjoiemVkZXgiLCJhIjoiY2tnOTVxbjZvMGYzYjMxbXFicTA2NmtubSJ9.qtN9HY13zsoq2n3Swcp7_A',
+        container: this.mapElement.nativeElement, // container ID
+        style: 'mapbox://styles/mapbox/streets-v11', // style URL
+        center: [-74.5, 40], // starting position [lng, lat]
+        zoom: 9, // starting zoom
+      });
+    }
+    
+
   }
 }
