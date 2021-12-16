@@ -67,11 +67,14 @@ export class SearchFormComponent implements OnInit {
           .getImagesFlickr(this.searchForm, this.currentPage)
           .subscribe((data) => {
             if (data.stat == 'ok') {
-              
-              this.showProgressBar = false;
-              this.arr = data.photos.photo;
-              shuffle(this.arr);
-              console.log('Toutes l es images ' + this.arr);
+              if(data.photos.photo){
+                this.showProgressBar = false;
+                this.arr = data.photos.photo;
+                shuffle(this.arr);
+                console.log('Toutes l es images ' + this.arr);
+              } else {
+                this.snackBar.open("Erreur",`Nous n'avons trouve aucune photo avec le nom : ${this.searchForm.value.keyword} `, {duration: 5000});
+              }
             }
           });
       } else {
@@ -82,6 +85,8 @@ export class SearchFormComponent implements OnInit {
           .getImagesFlickr(this.searchForm, this.currentPage)
           .subscribe((data) => {
             if (data.stat == 'ok') {
+   
+              if(data.photos.photo.length != 0){
               if(this.searchForm.value.size){
                 var sizeArr : any = [];
                 for (let i = 0; i < data.photos.photo.length; i++) {
@@ -101,6 +106,10 @@ export class SearchFormComponent implements OnInit {
                 this.arr = data.photos.photo;
                 shuffle(this.arr);
               }
+            }else {
+              this.showProgressBar = false;
+              this.snackBar.open("Erreur",`Nous n'avons trouve aucune photo avec le terme : ${this.searchForm.value.keyword} `, {duration: 5000});
+            }
             }
           });
       }
