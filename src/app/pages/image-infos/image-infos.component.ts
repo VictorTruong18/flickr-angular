@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { ActivatedRoute } from '@angular/router';
+import * as mapboxgl from 'mapbox-gl';
 import { FlickrSearchService } from '../../services/flickr-search.service';
 
 @Component({
@@ -46,5 +47,20 @@ export class ImageInfosComponent implements OnInit {
     this.flickrSearch.getComments(this.imageId).subscribe((data) => {
       this.comments = data;
     });
+  }
+  loadMap(event: any) {
+  
+    if (event.index==4)
+    {
+      console.log("entrer");
+
+        const map = new mapboxgl.Map({
+        accessToken: 'pk.eyJ1IjoiemVkZXgiLCJhIjoiY2tnOTVxbjZvMGYzYjMxbXFicTA2NmtubSJ9.qtN9HY13zsoq2n3Swcp7_A',
+        container: "map", // container ID
+        style: 'mapbox://styles/mapbox/streets-v11', // style URL
+        center: [-74.5, 40], // starting position [lng, lat]
+        zoom: 9, // starting zoom
+      });
+    }
   }
 }
