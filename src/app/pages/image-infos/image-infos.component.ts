@@ -3,7 +3,6 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 import { ActivatedRoute } from '@angular/router';
 import { FlickrSearchService } from '../../services/flickr-search.service';
 import * as mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
 @Component({
   selector: 'app-image-infos',
   templateUrl: './image-infos.component.html',
@@ -11,15 +10,13 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 })
 export class ImageInfosComponent implements OnInit {
   imageId: any;
-  image: imageInterface = {} as any as imageInterface;
-  comments: commentsInterface = {} as any as commentsInterface;
-  user: userInterface = {} as any as userInterface;
-  userPhotos: photosInterface = {} as any as photosInterface;
-
+  image?: imageInterface;
+  comments?: commentsInterface;
+  user?: userInterface;
+  userPhotos?: photosInterface;
+  location?: Flickr.Location;
   showProgressBar: boolean = true;
-
-  map?: mapboxgl.Map;
-  @ViewChild('map') mapElement?: ElementRef;
+  map!: mapboxgl.Map;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,31 +36,53 @@ export class ImageInfosComponent implements OnInit {
           .getInformationsUser(this.image.photo.owner.nsid)
           .subscribe((data) => {
             this.user = data;
+            console.log(data);
           });
 
         this.flickrSearch
           .getPhotosUser(this.image.photo.owner.nsid)
           .subscribe((data) => {
             this.userPhotos = data;
+            console.log(data);
           });
       }
     });
     this.flickrSearch.getComments(this.imageId).subscribe((data) => {
       this.comments = data;
+      console.log(data);
+    });
+    this.flickrSearch.getGeocalisation(this.imageId).subscribe({
+      next: (data: any) => {
+        if (data.stat === 'fail') {
+          throw new Error(data.message);
+        }
+        this.location = data.photo.location;
+        console.log(this.location)
+      },
+      error: (err) => console.error('getGeocalisation: ', err),
     });
   }
   loadMap(event: any) {
     if (event.index == 4) {
-      console.log('entrer');
-
-      const map = new mapboxgl.Map({
-        accessToken:
-          'pk.eyJ1IjoiemVkZXgiLCJhIjoiY2tnOTVxbjZvMGYzYjMxbXFicTA2NmtubSJ9.qtN9HY13zsoq2n3Swcp7_A',
-        container: 'map', // container ID
-        style: 'mapbox://styles/mapbox/streets-v11', // style URL
-        center: [-74.5, 40], // starting position [lng, lat]
-        zoom: 9, // starting zoom
-      });
+      if (this.location) {
+        this.map = new mapboxgl.Map({
+          accessToken:
+            'pk.eyJ1IjoiemVkZXgiLCJhIjoiY2tnOTVxbjZvMGYzYjMxbXFicTA2NmtubSJ9.qtN9HY13zsoq2n3Swcp7_A',
+          container: 'map', // container ID
+          style: 'mapbox://styles/mapbox/streets-v11', // style URL
+          center: [+this.location.longitude, +this.location.latitude], // starting position [lng, lat]
+          zoom: 9, // starting zoom
+        });
+  
+        // const popup = new mapboxgl.Popup({ offset: 25 }) // add popups
+        //   .setHTML(``);
+        new mapboxgl.Marker({ draggable: true })
+          .setLngLat([+this.location.longitude, +this.location.latitude])
+          // .setPopup(popup)
+          .addTo(this.map);
+      }
     }
+
+
   }
 }

@@ -24,6 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MapComponent } from './components/map/map.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     ImagesListComponent,
     ImageComponent,
     ImageInfosComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,

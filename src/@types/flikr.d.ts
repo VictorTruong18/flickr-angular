@@ -1,3 +1,32 @@
+declare namespace Flickr {
+  enum ResponseStatEnum {
+    FAIL = 'fail',
+    OK = 'ok',
+  }
+  type Reponse<T> = T & {
+    stat: ResponseStatEnum;
+    code?: number;
+    message?: string;
+  };
+  // interface Reponse<
+  //   T extends {
+  //     stat: ResponseStatEnum;
+  //     code?: number;
+  //     message?: string;
+  //   }
+  // > {}
+  interface GeoPosition {
+    id: number
+    photo: Location;
+  }
+  
+  interface Location {
+    latitude: String;
+    longitude: String;
+    accuracy: String;
+    context: String;
+  }
+}
 interface FlickrPhoto {
   farm: string;
   id: string;
@@ -141,15 +170,4 @@ interface userInterface {
 
 interface Content {
   _content: String;
-}
-
-interface GeoPosition {
-  photo: Location;
-}
-
-interface Location {
-  latitude:String;
-  longitude:String;
-  accuracy:String;
-  context:String;
 }
