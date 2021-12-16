@@ -13,9 +13,12 @@
 </figcaption>
 
 <div *ngIf="image != null">
-  <mat-tab-group mat-align-tabs="center">
+  <mat-tab-group mat-align-tabs="center" (selectedTabChange)="loadMap($event)">
     <mat-tab label="Description">
-      <p style="margin: 40px" [innerHTML]="image.photo.description._content"></p>
+      <p
+        style="margin: 40px"
+        [innerHTML]="image.photo.description._content"
+      ></p>
     </mat-tab>
     <mat-tab label="Tags">
       <div style="margin: 40px">
@@ -50,10 +53,9 @@
       </div>
     </mat-tab>
     <mat-tab label="Map">
-      <div style="margin: 40px; text-align: center">
-        <div id="map" >
-          
-        </div>
+      <div style="margin: 40px; text-align: center; display: flex">
+        <p>coucou</p>
+        <div id="map"></div>
       </div>
     </mat-tab>
   </mat-tab-group>

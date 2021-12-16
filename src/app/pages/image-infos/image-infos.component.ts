@@ -3,7 +3,7 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 import { ActivatedRoute } from '@angular/router';
 import { FlickrSearchService } from '../../services/flickr-search.service';
 import * as mapboxgl from 'mapbox-gl';
-import "mapbox-gl/dist/mapbox-gl.css";
+import 'mapbox-gl/dist/mapbox-gl.css';
 @Component({
   selector: 'app-image-infos',
   templateUrl: './image-infos.component.html',
@@ -52,18 +52,18 @@ export class ImageInfosComponent implements OnInit {
       this.comments = data;
     });
   }
-  ngAfterViewInit() {
-    if (this.mapElement) {
+  loadMap(event: any) {
+    if (event.index == 4) {
+      console.log('entrer');
 
-      this.map = new mapboxgl.Map({
-        accessToken: 'pk.eyJ1IjoiemVkZXgiLCJhIjoiY2tnOTVxbjZvMGYzYjMxbXFicTA2NmtubSJ9.qtN9HY13zsoq2n3Swcp7_A',
-        container: this.mapElement.nativeElement, // container ID
+      const map = new mapboxgl.Map({
+        accessToken:
+          'pk.eyJ1IjoiemVkZXgiLCJhIjoiY2tnOTVxbjZvMGYzYjMxbXFicTA2NmtubSJ9.qtN9HY13zsoq2n3Swcp7_A',
+        container: 'map', // container ID
         style: 'mapbox://styles/mapbox/streets-v11', // style URL
         center: [-74.5, 40], // starting position [lng, lat]
         zoom: 9, // starting zoom
       });
     }
-    
-
   }
 }
