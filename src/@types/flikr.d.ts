@@ -104,6 +104,7 @@ interface sizesInterface {
   sizes: {
     size: Size[];
   };
+  stat: string;
 }
 
 interface Size {

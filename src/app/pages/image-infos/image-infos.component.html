@@ -88,6 +88,16 @@
           <app-images-list [images]="userPhotos.photos.photo"></app-images-list>
         </div>
       </mat-tab>
+
+      <mat-tab label="Formats">
+        <div style="margin: 40px; text-align: center">
+          <h1>Les Formats Disponibles ( largeur x longueur )</h1>
+          <div *ngFor="let format of sizes.sizes.size">
+            <a href="{{format.url}}"><h3>{{format.label}} x {{format.media}} - {{format.height}} x {{format.width}} </h3>
+              </a>
+          </div>     
+        </div>
+      </mat-tab>
     </mat-tab-group>
   </div>
 </ng-template>

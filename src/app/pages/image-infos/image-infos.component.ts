@@ -14,7 +14,7 @@ export class ImageInfosComponent implements OnInit {
   comments: commentsInterface = {} as any as commentsInterface;
   user: userInterface = {} as any as userInterface;
   userPhotos: photosInterface = {} as any as photosInterface;
-
+  sizes: sizesInterface = {} as any as sizesInterface;
   showProgressBar: boolean = true;
   showProgressBarTab: boolean[] = [];
 
@@ -43,9 +43,16 @@ export class ImageInfosComponent implements OnInit {
                     this.flickrSearch
                       .getComments(this.imageId)
                       .subscribe((data) => {
-                        if (data.stat == 'ok') {
+                        if (data.stat == 'ok') {                          
                           this.comments = data;
-                          this.showProgressBar = false;
+                          
+                          this.flickrSearch
+                          .getSize(this.imageId).subscribe((data) => {
+                            if (data.stat == 'ok') {   
+                            this.sizes = data;
+                            this.showProgressBar = false;
+                            }
+                          })
                         }
                       });
                   }
