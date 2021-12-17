@@ -14,10 +14,10 @@ export class ImageInfosComponent implements OnInit {
   comments: commentsInterface = {} as any as commentsInterface;
   user: userInterface = {} as any as userInterface;
   userPhotos: photosInterface = {} as any as photosInterface;
-  
+
   showProgressBar: boolean = true;
-  showProgressBarTab : boolean[] = [];
-  
+  showProgressBarTab: boolean[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private flickrSearch: FlickrSearchService
@@ -36,24 +36,23 @@ export class ImageInfosComponent implements OnInit {
             if (data.stat == 'ok') {
               this.user = data;
               this.flickrSearch
-              .getPhotosUser(this.image.photo.owner.nsid)
-              .subscribe((data) => {
-                if (data.stat == 'ok') {
-                  this.userPhotos = data;
-                  this.flickrSearch.getComments(this.imageId).subscribe((data) => {
-                    if (data.stat == 'ok') {
-                      this.comments = data;
-                      this.showProgressBar = false;
-                    }
-                  });
-                }
-              });
+                .getPhotosUser(this.image.photo.owner.nsid)
+                .subscribe((data) => {
+                  if (data.stat == 'ok') {
+                    this.userPhotos = data;
+                    this.flickrSearch
+                      .getComments(this.imageId)
+                      .subscribe((data) => {
+                        if (data.stat == 'ok') {
+                          this.comments = data;
+                          this.showProgressBar = false;
+                        }
+                      });
+                  }
+                });
             }
           });
-
-        
       }
     });
-    
   }
 }

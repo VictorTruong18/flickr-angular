@@ -13,6 +13,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./search-form.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
+
+//Slider handler - Le slide qui permet de modifier la taille des images
 export class SearchFormComponent implements OnInit {
   onInputChange(event: MatSliderChange) {
     const elm = Array.from(
@@ -25,6 +27,7 @@ export class SearchFormComponent implements OnInit {
     }
   }
 
+  //L'array qui va contenenir toutes les photos a afficher
   arr: any[] = [];
   //Form object qui nous permet de reccuperer les donnees du formulaire
   searchForm = this.formBuilder.group({
@@ -40,13 +43,19 @@ export class SearchFormComponent implements OnInit {
     fromGallery: false,
   });
 
+  //La page courante
   currentPage: any = 1;
-  previousKeyword: any = null;
+  //La recherche prescedente
+  previousSearch: any = null;
+  //Un Boolean pour determiner si on montre ou non la search bar
   showProgressBar: boolean = false;
 
   constructor(
+    //Le material qui correspond au formulaire
     private formBuilder: FormBuilder,
+    //Le service FlickR
     private flickrService: FlickrSearchService,
+    //Le service de notifications
     private snackBar: MatSnackBar
   ) {}
 
@@ -55,7 +64,9 @@ export class SearchFormComponent implements OnInit {
 
   //Fonction qui est triggered des que l'utilisateur appuie sur Submit
   onSubmit() {
+    //Est-ce que l'utilisateur a mis une recherche
     if (this.searchForm.value.keyword) {
+      //Est-ce que l'utilisateur a exceder le nombre de photos par page
       if (this.searchForm.value.nbPhotos > 500) {
         this.snackBar.open(
           'Erreur',
@@ -63,19 +74,22 @@ export class SearchFormComponent implements OnInit {
           { duration: 3000 }
         );
       }
-
-      if (this.searchForm.value == this.previousKeyword) {
-        this.previousKeyword = this.searchForm.value;
+      //Si la requete est la meme que la prescedente
+      if (this.searchForm.value == this.previousSearch) {
+        this.previousSearch = this.searchForm.value;
         this.showProgressBar = true;
         this.flickrService
           .getImagesFlickr(this.searchForm, this.currentPage)
           .subscribe((data) => {
             if (data.stat == 'ok') {
               if (data.photos.photo) {
-                this.showProgressBar = false;
-                this.arr = data.photos.photo;
-                shuffle(this.arr);
-                console.log('Toutes l es images ' + this.arr);
+                if(this.searchForm.value.size){
+                  this.getAllThePicturesBySize(data);
+                } else {
+                  this.showProgressBar = false;
+                  this.arr = data.photos.photo;
+                  shuffle(this.arr);  
+                }
               } else {
                 this.snackBar.open(
                   'Erreur',
@@ -86,7 +100,7 @@ export class SearchFormComponent implements OnInit {
             }
           });
       } else {
-        this.previousKeyword = this.searchForm.value;
+        this.previousSearch = this.searchForm.value;
         this.currentPage = 1;
         this.showProgressBar = true;
         this.flickrService
@@ -94,27 +108,9 @@ export class SearchFormComponent implements OnInit {
           .subscribe((data) => {
             if (data.stat == 'ok') {
               if (data.photos.photo.length != 0) {
+                //Si l'utilisateur a rentre une taille d'image
                 if (this.searchForm.value.size) {
-                  var sizeArr: any = [];
-                  for (let i = 0; i < data.photos.photo.length; i++) {
-                    this.flickrService
-                      .getSize(data.photos.photo[i].id)
-                      .subscribe((res) => {
-                        for (let j = 0; j < res.sizes.size.length; j++) {
-                          if (
-                            sizes[this.searchForm.value.size] ==
-                              res.sizes.size[j].width ||
-                            sizes[this.searchForm.value.size] ==
-                              res.sizes.size[j].height
-                          ) {
-                            sizeArr.push(data.photos.photo[i]);
-                          }
-                        }
-                      });
-                  }
-                  this.showProgressBar = false;
-                  this.arr = sizeArr;
-                  shuffle(this.arr);
+                  this.getAllThePicturesBySize(data);
                 } else {
                   this.showProgressBar = false;
                   this.arr = data.photos.photo;
@@ -154,6 +150,25 @@ export class SearchFormComponent implements OnInit {
   pageSuivante() {
     this.currentPage += 1;
     this.onSubmit();
+  }
+
+  getAllThePicturesBySize(data: any) {
+    var sizeArr: any = [];
+    for (let i = 0; i < data.photos.photo.length; i++) {
+      this.flickrService.getSize(data.photos.photo[i].id).subscribe((res) => {
+        for (let j = 0; j < res.sizes.size.length; j++) {
+          if (
+            sizes[this.searchForm.value.size] == res.sizes.size[j].width ||
+            sizes[this.searchForm.value.size] == res.sizes.size[j].height
+          ) {
+            sizeArr.push(data.photos.photo[i]);
+          }
+        }
+      });
+    }
+    this.showProgressBar = false;
+    this.arr = sizeArr;
+    shuffle(this.arr);
   }
 }
 

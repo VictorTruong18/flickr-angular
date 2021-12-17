@@ -77,18 +77,15 @@
       <mat-tab label="Utilisateur">
         <div style="margin: 40px; text-align: center">
           <h1>{{ user.person.username._content }}</h1>
-          <div *ngIf="user.person.location != null;">
+          <div *ngIf="user.person.location != null">
             <h3>Emplacement :</h3>
             <p>{{ user.person.location._content }}</p>
           </div>
           <h3>Description :</h3>
           <p [innerHTML]="user.person.description._content"></p>
           <h3>Certaines de ses publications :</h3>
-          <div class="container">
-            <app-images-list
-              [images]="userPhotos.photos.photo"
-            ></app-images-list>
-          </div>
+
+          <app-images-list [images]="userPhotos.photos.photo"></app-images-list>
         </div>
       </mat-tab>
     </mat-tab-group>
