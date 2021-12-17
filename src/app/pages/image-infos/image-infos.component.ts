@@ -3,10 +3,12 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 import { ActivatedRoute } from '@angular/router';
 import { FlickrSearchService } from '../../services/flickr-search.service';
 import * as mapboxgl from 'mapbox-gl';
+
 @Component({
   selector: 'app-image-infos',
   templateUrl: './image-infos.component.html',
   styleUrls: ['./image-infos.component.css'],
+
 })
 export class ImageInfosComponent implements OnInit {
   imageId: any;

@@ -6,17 +6,18 @@ import { ImageInfosComponent } from './pages/image-infos/image-infos.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HomeComponent,
   },
   {
-    path: ':id',
+    path: 'image/:id',
     component: ImageInfosComponent,
   },
   {
     path: 'gallerie/:id',
     component: ImageGallerieComponent,
-  }
+  },
+  { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({

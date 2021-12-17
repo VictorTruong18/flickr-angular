@@ -7,6 +7,7 @@
     [formGroup]="searchForm"
     (ngSubmit)="onSubmit()"
   >
+    <!--INPUT : KEYWORD SEARCH-->
     <mat-form-field style="width: 40%" class="" appearance="fill">
       <mat-label>Recherche par mots-clés</mat-label>
       <input
@@ -16,7 +17,7 @@
         value=""
       />
     </mat-form-field>
-
+    <!--INPUT : SORT SEARCH-->
     <mat-form-field appearance="fill">
       <mat-label>Trier par</mat-label>
       <mat-select formControlName="sort">
@@ -35,7 +36,7 @@
         >
       </mat-select>
     </mat-form-field>
-
+    <!--INPUT : TAGS SEARCH-->
     <mat-form-field class="" appearance="fill">
       <mat-label>Tags</mat-label>
       <input
@@ -45,7 +46,7 @@
         value=""
       />
     </mat-form-field>
-
+    <!--INPUT : TAG MODE-->
     <mat-form-field appearance="fill">
       <mat-label>Tag Mode</mat-label>
       <mat-select formControlName="tag_mode">
@@ -53,7 +54,7 @@
         <mat-option value="any">Any (default)</mat-option>
       </mat-select>
     </mat-form-field>
-
+    <!--INPUT : NBR OF PHOTOS PER PAGE-->
     <mat-form-field class="" appearance="fill">
       <input
         matInput
@@ -62,7 +63,7 @@
       />
     </mat-form-field>
 
-    <!--Min and Max Upload Date Filter -->
+    <!--INPUT : DATA MINIMUM DE PUBLICATION-->
     <mat-form-field appearance="fill">
       <mat-label>Date minimum de publication</mat-label>
       <input
@@ -73,7 +74,7 @@
       <mat-datepicker-toggle matSuffix [for]="minDate"></mat-datepicker-toggle>
       <mat-datepicker #minDate></mat-datepicker>
     </mat-form-field>
-
+    <!--INPUT : DATA MAXIMUM DE PUBLICATION-->
     <mat-form-field appearance="fill">
       <mat-label>Date maximum de publication</mat-label>
       <input
@@ -84,7 +85,7 @@
       <mat-datepicker-toggle matSuffix [for]="maxDate"></mat-datepicker-toggle>
       <mat-datepicker #maxDate></mat-datepicker>
     </mat-form-field>
-
+    <!--INPUT : NSFW-->
     <mat-form-field appearance="fill">
       <mat-label>NSFW</mat-label>
       <mat-select formControlName="nsfw">
@@ -94,7 +95,7 @@
       </mat-select>
     </mat-form-field>
 
-    
+    <!--INPUT : TAILLE-->
     <mat-form-field appearance="fill">
       <mat-label>Taille ( Longueur ou Largeur )</mat-label>
       <mat-select formControlName="size">
@@ -110,9 +111,13 @@
         <mat-option value="b">1024</mat-option>
       </mat-select>
     </mat-form-field>
-
+    <!--INPUT : FROM GALLERY -->
     <mat-checkbox class="" formControlName="fromGallery"
       >Appartient à une galerie</mat-checkbox
+    >
+
+    <mat-checkbox class="" formControlName="hasGeo"
+      >A une localisation geographique</mat-checkbox
     >
 
     <button mat-stroked-button color="primary">Rechercher</button>

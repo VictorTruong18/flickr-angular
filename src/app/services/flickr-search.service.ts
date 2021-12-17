@@ -50,6 +50,7 @@ export class FlickrSearchService {
     let nsfw = form.value.nsfw;
     let fromGallery = form.value.fromGallery;
     let sort = form.value.sort;
+    let hasGeo = form.value.hasGeo;
     if (minUpload) {
       minUpload = minUpload.toISOString().slice(0, 19).replace('T', ' ');
       params += `&min_upload_date=${minUpload}`;
@@ -68,11 +69,14 @@ export class FlickrSearchService {
       params += `&safe_search=${nsfw}`;
     }
     if (fromGallery) {
-      params += `&in_gallery=1`;
+      params += `&in_gallery="1"`;
     }
     if (sort) {
       params += `&sort=${sort}`;
     }
+    if(hasGeo) {
+      params += `&has_geo="1"`;
+    } 
     return params;
   }
 
@@ -95,7 +99,7 @@ export class FlickrSearchService {
     // https://www.flickr.com/services/rest/?method=flickr.people.getPhotos&api_key=f13bf45b5485db7405ef5eda152ca951&user_id=56588665%40N00&per_page=10&format=json&nojsoncallback=1
     const url =
       'https://www.flickr.com/services/rest/?method=flickr.people.getPhotos';
-    let params = `&api_key=${environment.flickr.key}&user_id=${user_id}&per_page=10&format=json&nojsoncallback=1`;
+    let params = `&api_key=${environment.flickr.key}&user_id=${user_id}&per_page=50&format=json&nojsoncallback=1`;
     return this.http.get<photosInterface>(url + params);
   }
 

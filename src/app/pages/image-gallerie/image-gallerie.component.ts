@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FlickrSearchService } from '../../services/flickr-search.service';
+import { ViewEncapsulation } from '@angular/core';
 @Component({
   selector: 'app-image-gallerie',
   templateUrl: './image-gallerie.component.html',
-  styleUrls: ['./image-gallerie.component.css']
+  styleUrls: ['./image-gallerie.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ImageGallerieComponent implements OnInit {
 

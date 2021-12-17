@@ -41,6 +41,7 @@ export class SearchFormComponent implements OnInit {
     sort: '',
     nbPhotos: 250,
     fromGallery: false,
+    hasGeo: false,
   });
 
   //La page courante
