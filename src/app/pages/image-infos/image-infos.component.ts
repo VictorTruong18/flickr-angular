@@ -17,6 +17,7 @@ export class ImageInfosComponent implements OnInit {
   location?: Flickr.Location;
   showProgressBar: boolean = true;
   map!: mapboxgl.Map;
+  mapUp: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -63,8 +64,10 @@ export class ImageInfosComponent implements OnInit {
     });
   }
   loadMap(event: any) {
-    if (event.index == 4) {
+    if (event.index == 4 && !this.mapUp) {
       if (this.location) {
+        this.mapUp = true;
+
         this.map = new mapboxgl.Map({
           accessToken:
             'pk.eyJ1IjoiemVkZXgiLCJhIjoiY2tnOTVxbjZvMGYzYjMxbXFicTA2NmtubSJ9.qtN9HY13zsoq2n3Swcp7_A',
@@ -75,7 +78,7 @@ export class ImageInfosComponent implements OnInit {
         });
         this.map.addControl(new mapboxgl.NavigationControl( {
           showZoom : true,
-          showCompass: true,
+          
           visualizePitch: true
         }),);
         this.map.addLayer({
