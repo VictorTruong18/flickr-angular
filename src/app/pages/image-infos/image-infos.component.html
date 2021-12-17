@@ -1,53 +1,69 @@
-<h1 class="title">{{ image.photo.title._content }}</h1>
-
-<img
-  class="img-centered"
-  src="https://live.staticflickr.com/{{ image.photo.server }}/{{
-    image.photo.id
-  }}_{{ image.photo.secret }}_b.jpg"
-/>
-
-<figcaption style="text-align: center; margin-bottom: 20px">
-  Posté par {{ image.photo.owner.realname }}, prise le
-  {{ image.photo.dates.taken }}, vu {{ image.photo.views }} fois.
-</figcaption>
-
-<div *ngIf="image != null">
-  <mat-tab-group mat-align-tabs="center">
-    <mat-tab label="Description">
-      <p style="margin: 40px" [innerHTML]="image.photo.description._content"></p>
-    </mat-tab>
-    <mat-tab label="Tags">
-      <div style="margin: 40px">
-        <mat-chip-list>
-          <mat-chip *ngFor="let tag of image.photo.tags.tag">
-            {{ tag.raw }}
-          </mat-chip>
-        </mat-chip-list>
-      </div>
-    </mat-tab>
-    <mat-tab label="Commentaires">
-      <div style="margin: 40px">
-        <div *ngFor="let com of comments.comments.comment">
-          <b>{{ com.authorname }}</b> :
-          <p style="margin: 10px" [innerHTML]="com._content"></p>
-          <!-- Display html in content is ¿dangerous? -->
-          <br />
-        </div>
-      </div>
-    </mat-tab>
-    <mat-tab label="Utilisateur">
-      <div style="margin: 40px; text-align: center">
-        <h1>{{ user.person.username._content }}</h1>
-        <h3>Emplacement :</h3>
-        <p>{{ user.person.location._content }}</p>
-        <h3>Description :</h3>
-        <p [innerHTML]="user.person.description._content"></p>
-        <h3>Certaines de ses publications :</h3>
-        <div class="container">
-          <app-images-list [images]="userPhotos.photos.photo"></app-images-list>
-        </div>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
+<div *ngIf="showProgressBar; else content " class="wrapper">
+  <h1>Chargement</h1>
+  <span class="circle circle-1"></span>
+  <span class="circle circle-2"></span>
+  <span class="circle circle-3"></span>
+  <span class="circle circle-4"></span>
+  <span class="circle circle-5"></span>
+  <span class="circle circle-6"></span>
+  <span class="circle circle-7"></span>
+  <span class="circle circle-8"></span>
 </div>
+
+
+<ng-template #content>
+  <div class="background" style="padding-top: 2%">
+  <h1 class="title">{{ image.photo.title._content }}</h1>
+
+  <img
+    class="img-centered"
+    src="https://live.staticflickr.com/{{ image.photo.server }}/{{
+      image.photo.id
+    }}_{{ image.photo.secret }}_b.jpg"
+  />
+
+  <figcaption style="text-align: center; padding-bottom: 5%; color: white">
+    Posté par {{ image.photo.owner.realname }}, prise le
+    {{ image.photo.dates.taken }}, vu {{ image.photo.views }} fois.
+  </figcaption>
+</div>
+  <div *ngIf="image != null">
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="Description">
+        <p style="margin: 40px" [innerHTML]="image.photo.description._content"></p>
+      </mat-tab>
+      <mat-tab label="Tags">
+        <div style="margin: 40px">
+          <mat-chip-list>
+            <mat-chip  *ngFor="let tag of image.photo.tags.tag">
+              {{ tag.raw }}
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+      </mat-tab>
+      <mat-tab label="Commentaires">
+        <div style="margin: 40px">
+          <div *ngFor="let com of comments.comments.comment">
+            <b>{{ com.authorname }}</b> :
+            <p style="margin: 10px" [innerHTML]="com._content"></p>
+            <!-- Display html in content is ¿dangerous? -->
+            <br />
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Utilisateur">
+        <div style="margin: 40px; text-align: center">
+          <h1>{{ user.person.username._content }}</h1>
+          <h3>Emplacement :</h3>
+          <p>{{ user.person.location._content }}</p>
+          <h3>Description :</h3>
+          <p [innerHTML]="user.person.description._content"></p>
+          <h3>Certaines de ses publications :</h3>
+          <div class="container">
+            <app-images-list [images]="userPhotos.photos.photo"></app-images-list>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</ng-template>

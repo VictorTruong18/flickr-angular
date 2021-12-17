@@ -83,6 +83,7 @@ interface commentsInterface {
   comments: {
     comment: Com[];
   };
+  stat: string;
 }
 
 interface Com {
@@ -137,6 +138,7 @@ interface userInterface {
     mobileurl: Content; //{ "_content": "https:\/\/m.flickr.com\/photostream.gne?id=483057" },
     // photos: Content; //{ "firstdatetaken": { "_content": "1970-01-01 00:00:00" }, "firstdate": { "_content": "1112903116" }, "count": { "_content": "11396" } }, "has_adfree": 0, "has_free_standard_shipping": 0, "has_free_educational_resources": 0 }, "stat": "ok" }
   };
+  stat: String;
 }
 
 interface Content {

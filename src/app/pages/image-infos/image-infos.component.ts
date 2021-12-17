@@ -14,8 +14,9 @@ export class ImageInfosComponent implements OnInit {
   comments: commentsInterface = {} as any as commentsInterface;
   user: userInterface = {} as any as userInterface;
   userPhotos: photosInterface = {} as any as photosInterface;
-
+  
   showProgressBar: boolean = true;
+  showProgressBarTab : boolean[] = [];
   constructor(
     private route: ActivatedRoute,
     private flickrSearch: FlickrSearchService
@@ -27,24 +28,29 @@ export class ImageInfosComponent implements OnInit {
     this.flickrSearch.getImageInfo(this.imageId).subscribe((data) => {
       //L'image implemente l'interface et contient toutes les informations
       if (data.stat == 'ok') {
-        this.showProgressBar = false;
         this.image = data;
-
         this.flickrSearch
           .getInformationsUser(this.image.photo.owner.nsid)
           .subscribe((data) => {
-            this.user = data;
+            if (data.stat == 'ok') {
+              this.user = data;
+            }
           });
 
         this.flickrSearch
           .getPhotosUser(this.image.photo.owner.nsid)
           .subscribe((data) => {
-            this.userPhotos = data;
+            if (data.stat == 'ok') {
+              this.userPhotos = data;
+              this.showProgressBar = false;
+            }
           });
       }
     });
     this.flickrSearch.getComments(this.imageId).subscribe((data) => {
-      this.comments = data;
+      if (data.stat == 'ok') {
+        this.comments = data;
+      }
     });
   }
 }
