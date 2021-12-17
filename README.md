@@ -26,7 +26,7 @@ Notre répertoire git : [https://github.com/VictorTruong18/PROJET-ANGULAR-FLICKR
 
 # Commandes pour lancer le projet :
 
-`git clone [https://github.com/VictorTruong18/PROJET-ANGULAR-FLICKR.git](https://github.com/VictorTruong18/PROJET-ANGULAR-FLICKR.git)`
+`git clone https://github.com/VictorTruong18/PROJET-ANGULAR-FLICKR.git`
 
 `npm install`
 
