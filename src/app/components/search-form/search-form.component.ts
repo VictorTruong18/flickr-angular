@@ -90,11 +90,26 @@ export class SearchFormComponent implements OnInit {
                   this.showProgressBar = false;
                   this.arr = data.photos.photo;
                   shuffle(this.arr);  
-                }
+                } 
               } else {
                 this.snackBar.open(
                   'Erreur',
                   `Nous n'avons trouve aucune photo avec le nom : ${this.searchForm.value.keyword} `,
+                  { duration: 5000 }
+                );
+              }
+            }
+            (err: HttpErrorResponse) => {
+              if(err.error instanceof Error){
+                this.snackBar.open(
+                  'Erreur',
+                  `Client-side error occured. `,
+                  { duration: 5000 }
+                );
+              } else {
+                this.snackBar.open(
+                  'Erreur',
+                  'Server-side error occured.',
                   { duration: 5000 }
                 );
               }
@@ -122,6 +137,21 @@ export class SearchFormComponent implements OnInit {
                 this.snackBar.open(
                   'Erreur',
                   `Nous n'avons trouve aucune photo avec le terme : ${this.searchForm.value.keyword} `,
+                  { duration: 5000 }
+                );
+              }
+            }
+            (err: HttpErrorResponse) => {
+              if(err.error instanceof Error){
+                this.snackBar.open(
+                  'Erreur',
+                  `Client-side error occured. `,
+                  { duration: 5000 }
+                );
+              } else {
+                this.snackBar.open(
+                  'Erreur',
+                  'Server-side error occured.',
                   { duration: 5000 }
                 );
               }
