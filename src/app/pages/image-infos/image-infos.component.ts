@@ -17,6 +17,7 @@ export class ImageInfosComponent implements OnInit {
   
   showProgressBar: boolean = true;
   showProgressBarTab : boolean[] = [];
+  
   constructor(
     private route: ActivatedRoute,
     private flickrSearch: FlickrSearchService

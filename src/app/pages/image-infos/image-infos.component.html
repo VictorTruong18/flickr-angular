@@ -30,28 +30,38 @@
   <div *ngIf="image != null">
     <mat-tab-group mat-align-tabs="center">
       <mat-tab label="Description">
-        <p style="margin: 40px" [innerHTML]="image.photo.description._content"></p>
+        <div *ngIf="image.photo.description._content; else  no_description">
+           <p   style="padding: 5% 10% 10% 10%" [innerHTML]="image.photo.description._content"></p>
+      </div>
+      <ng-template #no_description>
+        <h1  style="padding: 5% 20% 10% 20%; text-align: center">Aucune Description</h1>
+      </ng-template>
       </mat-tab>
       <mat-tab label="Tags">
         <div style="margin: 40px">
-          <mat-chip-list>
-            <mat-chip  *ngFor="let tag of image.photo.tags.tag">
+          <div *ngIf="image.photo.tags.tag.length != 0 ; else  no_tags">
+          <mat-chip-list >
+            <mat-chip *ngFor="let tag of image.photo.tags.tag">
               {{ tag.raw }}
             </mat-chip>
           </mat-chip-list>
+          </div>
+          <ng-template #no_tags>
+          <h1 style="padding: 5% 20% 10% 20%;  text-align: center">Aucun Tag</h1>
+        </ng-template>
         </div>
       </mat-tab>
-      <mat-tab label="Commentaires">
-        <div style="margin: 40px">
+      <mat-tab label="Commentaires" >
+        <div style="margin: 40px" >
           <div *ngFor="let com of comments.comments.comment">
-            <b>{{ com.authorname }}</b> :
+            <b >{{ com.authorname }}</b> :
             <p style="margin: 10px" [innerHTML]="com._content"></p>
             <!-- Display html in content is ¿dangerous? -->
             <br />
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="Utilisateur">
+      <mat-tab label="Utilisateur" >
         <div style="margin: 40px; text-align: center">
           <h1>{{ user.person.username._content }}</h1>
           <h3>Emplacement :</h3>
