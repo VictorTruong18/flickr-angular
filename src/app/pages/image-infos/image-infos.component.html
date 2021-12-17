@@ -53,12 +53,17 @@
       </mat-tab>
       <mat-tab label="Commentaires" >
         <div style="margin: 40px" >
-          <div *ngFor="let com of comments.comments.comment">
-            <b >{{ com.authorname }}</b> :
-            <p style="margin: 10px" [innerHTML]="com._content"></p>
-            <!-- Display html in content is ¿dangerous? -->
-            <br />
-          </div>
+          <div *ngIf="comments.comments.comment; else  no_comment">
+            <div *ngFor="let com of comments.comments.comment">
+              <b >{{ com.authorname }}</b> :
+              <p style="margin: 10px" [innerHTML]="com._content"></p>
+              <!-- Display html in content is ¿dangerous? -->
+              <br />
+            </div>
+        </div>
+        <ng-template #no_comment>
+          <h1 style="padding: 5% 20% 10% 20%;  text-align: center">Aucun Commentaire</h1>
+        </ng-template>
         </div>
       </mat-tab>
       <mat-tab label="Utilisateur" >

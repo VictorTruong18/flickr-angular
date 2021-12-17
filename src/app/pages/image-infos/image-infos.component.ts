@@ -35,23 +35,25 @@ export class ImageInfosComponent implements OnInit {
           .subscribe((data) => {
             if (data.stat == 'ok') {
               this.user = data;
+              this.flickrSearch
+              .getPhotosUser(this.image.photo.owner.nsid)
+              .subscribe((data) => {
+                if (data.stat == 'ok') {
+                  this.userPhotos = data;
+                  this.flickrSearch.getComments(this.imageId).subscribe((data) => {
+                    if (data.stat == 'ok') {
+                      this.comments = data;
+                      this.showProgressBar = false;
+                    }
+                  });
+                }
+              });
             }
           });
 
-        this.flickrSearch
-          .getPhotosUser(this.image.photo.owner.nsid)
-          .subscribe((data) => {
-            if (data.stat == 'ok') {
-              this.userPhotos = data;
-              this.showProgressBar = false;
-            }
-          });
+        
       }
     });
-    this.flickrSearch.getComments(this.imageId).subscribe((data) => {
-      if (data.stat == 'ok') {
-        this.comments = data;
-      }
-    });
+    
   }
 }
