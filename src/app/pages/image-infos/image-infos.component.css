@@ -14,69 +14,66 @@
   background-color: #212123;
 }
 
-body{
+body {
   padding: 0;
   margin: 0;
   background-color: #fcdc29;
   text-align: center;
-  height:100vh;
-  font-family: 'lato';
-  font-weight: 100;;
+  height: 100vh;
+  font-family: "lato";
+  font-weight: 100;
 }
-.wrapper{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%); 
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-.circle{
+.circle {
   display: inline-block;
   width: 15px;
   height: 15px;
   background-color: #fcdc29;
   border-radius: 50%;
-  animation: loading 1.5s cubic-bezier(.8, .5, .2, 1.4) infinite;
+  animation: loading 1.5s cubic-bezier(0.8, 0.5, 0.2, 1.4) infinite;
   transform-origin: bottom center;
   position: relative;
 }
-@keyframes loading{
-  0%{
+@keyframes loading {
+  0% {
     transform: translateY(0px);
     background-color: #fcdc29;
   }
-  50%{
+  50% {
     transform: translateY(50px);
     background-color: #ef584a;
   }
-  100%{
+  100% {
     transform: translateY(0px);
     background-color: #fcdc29;
   }
 }
-.circle-1{
+.circle-1 {
   animation-delay: 0.1s;
 }
-.circle-2{
+.circle-2 {
   animation-delay: 0.2s;
 }
-.circle-3{
+.circle-3 {
   animation-delay: 0.3s;
 }
-.circle-4{
+.circle-4 {
   animation-delay: 0.4s;
 }
-.circle-5{
+.circle-5 {
   animation-delay: 0.5s;
 }
-.circle-6{
+.circle-6 {
   animation-delay: 0.6s;
 }
-.circle-7{
+.circle-7 {
   animation-delay: 0.7s;
 }
-.circle-8{
+.circle-8 {
   animation-delay: 0.8s;
 }
-
-
-

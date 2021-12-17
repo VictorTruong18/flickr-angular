@@ -150,8 +150,8 @@ interface GeoPosition {
 }
 
 interface Location {
-  latitude:String;
-  longitude:String;
-  accuracy:String;
-  context:String;
+  latitude: String;
+  longitude: String;
+  accuracy: String;
+  context: String;
 }

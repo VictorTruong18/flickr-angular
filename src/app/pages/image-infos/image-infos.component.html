@@ -1,4 +1,4 @@
-<div *ngIf="showProgressBar; else content " class="wrapper">
+<div *ngIf="showProgressBar; else content" class="wrapper">
   <h1>Chargement</h1>
   <span class="circle circle-1"></span>
   <span class="circle circle-2"></span>
@@ -10,72 +10,84 @@
   <span class="circle circle-8"></span>
 </div>
 
-
 <ng-template #content>
   <div class="background" style="padding-top: 2%">
-  <h1 class="title">{{ image.photo.title._content }}</h1>
+    <h1 class="title">{{ image.photo.title._content }}</h1>
 
-  <img
-    class="img-centered"
-    src="https://live.staticflickr.com/{{ image.photo.server }}/{{
-      image.photo.id
-    }}_{{ image.photo.secret }}_b.jpg"
-  />
+    <img
+      class="img-centered"
+      src="https://live.staticflickr.com/{{ image.photo.server }}/{{
+        image.photo.id
+      }}_{{ image.photo.secret }}_b.jpg"
+    />
 
-  <figcaption style="text-align: center; padding-bottom: 5%; color: white">
-    Posté par {{ image.photo.owner.realname }}, prise le
-    {{ image.photo.dates.taken }}, vu {{ image.photo.views }} fois.
-  </figcaption>
-</div>
+    <figcaption style="text-align: center; padding-bottom: 5%; color: white">
+      Posté par {{ image.photo.owner.realname }}, prise le
+      {{ image.photo.dates.taken }}, vu {{ image.photo.views }} fois.
+    </figcaption>
+  </div>
   <div *ngIf="image != null">
     <mat-tab-group mat-align-tabs="center">
       <mat-tab label="Description">
-        <div *ngIf="image.photo.description._content; else  no_description">
-           <p   style="padding: 5% 10% 10% 10%" [innerHTML]="image.photo.description._content"></p>
-      </div>
-      <ng-template #no_description>
-        <h1  style="padding: 5% 20% 10% 20%; text-align: center">Aucune Description</h1>
-      </ng-template>
+        <div *ngIf="image.photo.description._content; else no_description">
+          <p
+            style="padding: 5% 10% 10% 10%"
+            [innerHTML]="image.photo.description._content"
+          ></p>
+        </div>
+        <ng-template #no_description>
+          <h1 style="padding: 5% 20% 10% 20%; text-align: center">
+            Aucune Description
+          </h1>
+        </ng-template>
       </mat-tab>
       <mat-tab label="Tags">
         <div style="margin: 40px">
-          <div *ngIf="image.photo.tags.tag.length != 0 ; else  no_tags">
-          <mat-chip-list >
-            <mat-chip *ngFor="let tag of image.photo.tags.tag">
-              {{ tag.raw }}
-            </mat-chip>
-          </mat-chip-list>
+          <div *ngIf="image.photo.tags.tag.length != 0; else no_tags">
+            <mat-chip-list>
+              <mat-chip *ngFor="let tag of image.photo.tags.tag">
+                {{ tag.raw }}
+              </mat-chip>
+            </mat-chip-list>
           </div>
           <ng-template #no_tags>
-          <h1 style="padding: 5% 20% 10% 20%;  text-align: center">Aucun Tag</h1>
-        </ng-template>
+            <h1 style="padding: 5% 20% 10% 20%; text-align: center">
+              Aucun Tag
+            </h1>
+          </ng-template>
         </div>
       </mat-tab>
-      <mat-tab label="Commentaires" >
-        <div style="margin: 40px" >
-          <div *ngIf="comments.comments.comment; else  no_comment">
+      <mat-tab label="Commentaires">
+        <div style="margin: 40px">
+          <div *ngIf="comments.comments.comment; else no_comment">
             <div *ngFor="let com of comments.comments.comment">
-              <b >{{ com.authorname }}</b> :
+              <b>{{ com.authorname }}</b> :
               <p style="margin: 10px" [innerHTML]="com._content"></p>
               <!-- Display html in content is ¿dangerous? -->
               <br />
             </div>
-        </div>
-        <ng-template #no_comment>
-          <h1 style="padding: 5% 20% 10% 20%;  text-align: center">Aucun Commentaire</h1>
-        </ng-template>
+          </div>
+          <ng-template #no_comment>
+            <h1 style="padding: 5% 20% 10% 20%; text-align: center">
+              Aucun Commentaire
+            </h1>
+          </ng-template>
         </div>
       </mat-tab>
-      <mat-tab label="Utilisateur" >
+      <mat-tab label="Utilisateur">
         <div style="margin: 40px; text-align: center">
           <h1>{{ user.person.username._content }}</h1>
-          <h3>Emplacement :</h3>
-          <p>{{ user.person.location._content }}</p>
+          <div *ngIf="user.person.location != null;">
+            <h3>Emplacement :</h3>
+            <p>{{ user.person.location._content }}</p>
+          </div>
           <h3>Description :</h3>
           <p [innerHTML]="user.person.description._content"></p>
           <h3>Certaines de ses publications :</h3>
           <div class="container">
-            <app-images-list [images]="userPhotos.photos.photo"></app-images-list>
+            <app-images-list
+              [images]="userPhotos.photos.photo"
+            ></app-images-list>
           </div>
         </div>
       </mat-tab>

@@ -107,7 +107,7 @@ export class FlickrSearchService {
     return this.http.get<userInterface>(url + params);
   }
 
-  getGeocalisation(id: string): Observable<GeoPosition>{
+  getGeocalisation(id: string): Observable<GeoPosition> {
     const url =
       'https://www.flickr.com/services/rest/?method=flickr.photos.geo.getLocation';
     let params = `&api_key=${environment.flickr.key}&photo_id=${id}&format=json&nojsoncallback=1`;
