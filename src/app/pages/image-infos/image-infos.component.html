@@ -91,9 +91,18 @@
       </mat-tab>
 
       <mat-tab label="Map">
-        <div style="margin: 40px; text-align: center; display: flex">
-          <div id="map"></div>
+        <div *ngIf="location; else no_location">
+          <div style="margin: 40px; text-align: center; display: flex">
+            <div id="map"></div>
+          </div>
         </div>
+
+        <ng-template #no_location>
+          <h1 style="padding: 5% 20% 10% 20%; text-align: center">
+            Pas de géolocalisation
+          </h1>
+        </ng-template>
+        
       </mat-tab>
 
       <mat-tab label="Formats">

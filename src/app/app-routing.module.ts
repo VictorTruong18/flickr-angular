@@ -6,7 +6,7 @@ import { ImageInfosComponent } from './pages/image-infos/image-infos.component';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: HomeComponent,
   },
   {
@@ -17,7 +17,6 @@ const routes: Routes = [
     path: 'gallerie/:id',
     component: ImageGallerieComponent,
   },
-  { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({
