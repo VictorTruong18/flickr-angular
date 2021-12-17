@@ -1,5 +1,5 @@
 <div *ngIf="size" class="img-holder">
-  <a href="image/{{ image.id }}">
+  <a href="image/{{ image.id }}" target="blank">
     <img
       class="resizing"
       src="https://live.staticflickr.com/{{ image.server }}/{{ image.id }}_{{
@@ -10,7 +10,7 @@
 </div>
 
 <div *ngIf="!size" class="img-holder">
-  <a href="image/{{ image.id }}">
+  <a href="image/{{ image.id }}" target="blank">
     <img
       class="resizing"
       src="https://live.staticflickr.com/{{ image.server }}/{{ image.id }}_{{

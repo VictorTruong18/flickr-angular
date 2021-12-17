@@ -25,6 +25,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ImageGallerieComponent } from './pages/image-gallerie/image-gallerie.component';
+import { ErrorComponent } from './pages/error/error.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { ImageGallerieComponent } from './pages/image-gallerie/image-gallerie.co
     ImageComponent,
     ImageInfosComponent,
     ImageGallerieComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
