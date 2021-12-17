@@ -173,7 +173,8 @@ interface GalleryInterface {
   owner: String;
   title: Content;
   description: Content;
-  count_photos: String,
-  count_views: String
+  count_photos: String;
+  count_views: String;
+  primary_photo_id: String;
 }
 

@@ -121,4 +121,11 @@ export class FlickrSearchService {
     let params = `&api_key=${environment.flickr.key}&user_id=${userId}&sort_groups=has_photo&photo_ids=${photoId}&per_page=10&format=json&nojsoncallback=1`;
     return this.http.get<GallerieListInterface>(url + params);
   }
+
+  getGalleriePhotos(galleryId: string ) : Observable<photosInterface>{
+    const url =
+      'https://www.flickr.com/services/rest/?method=flickr.galleries.getPhotos';
+      let params = `&api_key=${environment.flickr.key}&gallery_id=${galleryId}&format=json&nojsoncallback=1`;
+      return this.http.get<photosInterface>(url + params);
+  }
 }

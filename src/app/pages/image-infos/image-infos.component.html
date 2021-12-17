@@ -108,10 +108,21 @@
 
       <mat-tab label="Galleries">
         <div style="margin: 40px; text-align: center">
-          <h1>Autres Galeries D'images de l'auteur qui pourraient vous intéresser</h1>
-          <div *ngFor="let gallery of galleriePhotos.galleries.gallery">
-            <h1>{{gallery.id}}</h1>
-          </div>     
+          <div *ngIf="galleriePhotos.galleries.gallery.length != 0; else no_galleries">
+            <h1>Autres Galeries D'images de l'auteur qui pourraient vous intéresser</h1>
+            
+            <div *ngFor="let gallery of galleriePhotos.galleries.gallery">
+              <a href="gallerie/{{ gallery.id }}">
+              <h3>{{gallery.title._content}}</h3>
+            </a>
+            </div>     
+        </div>
+
+        <ng-template #no_galleries>
+          <h1 style="padding: 5% 20% 10% 20%; text-align: center">
+            Aucune Gallerie
+          </h1>
+        </ng-template>
         </div>
       </mat-tab>
     </mat-tab-group>
