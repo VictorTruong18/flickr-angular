@@ -104,6 +104,7 @@ export class FlickrSearchService {
     const url =
       'https://www.flickr.com/services/rest/?method=flickr.people.getInfo';
     let params = `&api_key=${environment.flickr.key}&user_id=${user_id}&per_page=10&format=json&nojsoncallback=1`;
+    console.log(url + params)
     return this.http.get<userInterface>(url + params);
   }
 
@@ -112,5 +113,12 @@ export class FlickrSearchService {
       'https://www.flickr.com/services/rest/?method=flickr.photos.geo.getLocation';
     let params = `&api_key=${environment.flickr.key}&photo_id=${id}&format=json&nojsoncallback=1`;
     return this.http.get<GeoPosition>(url + params);
+  }
+
+  getGallerieList(userId:string, photoId:string) : Observable<GallerieListInterface> {
+    const url =
+      'https://www.flickr.com/services/rest/?method=flickr.galleries.getList';
+    let params = `&api_key=${environment.flickr.key}&user_id=${userId}&sort_groups=has_photo&photo_ids=${photoId}&per_page=10&format=json&nojsoncallback=1`;
+    return this.http.get<GallerieListInterface>(url + params);
   }
 }

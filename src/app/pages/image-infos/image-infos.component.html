@@ -27,7 +27,8 @@
     </figcaption>
   </div>
   <div *ngIf="image != null">
-    <mat-tab-group mat-align-tabs="center">
+    
+    <mat-tab-group mat-align-tabs="center" (selectedTabChange)="loadMap($event)">
       <mat-tab label="Description">
         <div *ngIf="image.photo.description._content; else no_description">
           <p
@@ -89,12 +90,27 @@
         </div>
       </mat-tab>
 
+      <mat-tab label="Map">
+        <div style="margin: 40px; text-align: center; display: flex">
+          <div id="map"></div>
+        </div>
+      </mat-tab>
+
       <mat-tab label="Formats">
         <div style="margin: 40px; text-align: center">
           <h1>Les Formats Disponibles ( largeur x longueur )</h1>
           <div *ngFor="let format of sizes.sizes.size">
             <a href="{{format.url}}"><h3>{{format.label}} x {{format.media}} - {{format.height}} x {{format.width}} </h3>
               </a>
+          </div>     
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Galleries">
+        <div style="margin: 40px; text-align: center">
+          <h1>Autres Galeries D'images de l'auteur qui pourraient vous intéresser</h1>
+          <div *ngFor="let gallery of galleriePhotos.galleries.gallery">
+            <h1>{{gallery.id}}</h1>
           </div>     
         </div>
       </mat-tab>

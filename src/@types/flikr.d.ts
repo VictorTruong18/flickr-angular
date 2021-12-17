@@ -156,3 +156,24 @@ interface Location {
   accuracy: String;
   context: String;
 }
+
+interface GallerieListInterface {
+  galleries: Gallery;
+  stat: String;
+}
+
+interface Gallery {
+  gallery: GalleryInterface[];
+}
+
+interface GalleryInterface {
+  id: String;
+  gallery_id: String;
+  url: String;
+  owner: String;
+  title: Content;
+  description: Content;
+  count_photos: String,
+  count_views: String
+}
+
